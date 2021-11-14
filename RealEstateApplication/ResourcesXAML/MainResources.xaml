@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewmodel="clr-namespace:RealEstateApplication.ViewModel">
+    <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:HomepageViewModel x:Key="HomepageVM"></viewmodel:HomepageViewModel>
+    <viewmodel:PurchaseViewModel x:Key="PuchaseVM" ></viewmodel:PurchaseViewModel>
+    <viewmodel:RentViewModel x:Key="RentVM" ></viewmodel:RentViewModel>
+    <viewmodel:ProjectViewModel x:Key="ProjectVM"></viewmodel:ProjectViewModel>
+</ResourceDictionary>
