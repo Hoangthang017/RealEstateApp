@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using RealEstateApplication.Model;
 using RealEstateApplication.UserControls;
 
 namespace RealEstateApplication.ViewModel
@@ -25,20 +26,23 @@ namespace RealEstateApplication.ViewModel
             // các commnad
             LoadedMainWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                OpenUC(p as Grid, new Homepage());
+                // 1 lần duy nhất
+                OpenUC.GridOpenUC = (p as Grid);
+
+                // truyền dữ liệu
+                var newHomePage = new Homepage();
+                var datacontext = (newHomePage.DataContext as HomepageViewModel);
+                datacontext.Query = "Test query";
+                OpenUC.OpenChildUC(newHomePage);
+
+                //
+                Filter.CreateListData();
             });
 
-            OpenHomepageUCCommand = new RelayCommand<object>((p) => { return true; }, (p) =>{OpenUC(p as Grid, new Homepage());});
-            OpenPurchaseUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC(p as Grid, new PuchaseUC()); });
-            OpenRentUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC(p as Grid, new RentUC()); });
-            OpenProjectUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC(p as Grid, new ProjectUC()); });
-        }
-
-        // hàm mở user controls
-        void OpenUC(Grid gridContent, UserControl uc)
-        {
-            gridContent.Children.Clear();
-            gridContent.Children.Add(uc);
+            OpenHomepageUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC.OpenChildUC(new Homepage()); });
+            OpenPurchaseUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC.OpenChildUC(new PuchaseUC()); });
+            OpenRentUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC.OpenChildUC(new RentUC()); });
+            OpenProjectUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC.OpenChildUC(new ProjectUC()); });
         }
     }
 }

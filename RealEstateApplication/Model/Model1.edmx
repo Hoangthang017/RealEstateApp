@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RealEstateManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ProjectInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="link" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="RealEstateInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="typeRealEstate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="img" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="descriptRealEstate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="price" Type="nvarchar" MaxLength="50" />
+          <Property Name="locationRealEstate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="area" Type="int" />
+          <Property Name="timepost" Type="datetime" Nullable="false" />
+          <Property Name="addressRealEstate" Type="nvarchar" MaxLength="500" />
+          <Property Name="streetWidth" Type="int" />
+          <Property Name="orientation" Type="nvarchar" MaxLength="20" />
+          <Property Name="width" Type="int" />
+          <Property Name="lenght" Type="int" />
+          <Property Name="floors" Type="int" />
+          <Property Name="bedrooms" Type="int" />
+          <Property Name="toilets" Type="int" />
+          <Property Name="furniture" Type="nvarchar" MaxLength="300" />
+          <Property Name="legalDocument" Type="nvarchar" MaxLength="150" />
+          <Property Name="projectId" Type="int" />
+        </EntityType>
+        <EntityContainer Name="RealEstateManagementModelStoreContainer">
+          <EntitySet Name="ProjectInfo" EntityType="Self.ProjectInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RealEstateInfo" EntityType="Self.RealEstateInfo" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RealEstateManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ProjectInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="link" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RealEstateInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="typeRealEstate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="img" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descriptRealEstate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="locationRealEstate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="area" Type="Int32" />
+          <Property Name="timepost" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="addressRealEstate" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="streetWidth" Type="Int32" />
+          <Property Name="orientation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="width" Type="Int32" />
+          <Property Name="lenght" Type="Int32" />
+          <Property Name="floors" Type="Int32" />
+          <Property Name="bedrooms" Type="Int32" />
+          <Property Name="toilets" Type="Int32" />
+          <Property Name="furniture" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="legalDocument" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="projectId" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="RealEstateManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ProjectInfoes" EntityType="Self.ProjectInfo" />
+          <EntitySet Name="RealEstateInfoes" EntityType="Self.RealEstateInfo" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RealEstateManagementModelStoreContainer" CdmEntityContainer="RealEstateManagementEntities">
+          <EntitySetMapping Name="ProjectInfoes">
+            <EntityTypeMapping TypeName="RealEstateManagementModel.ProjectInfo">
+              <MappingFragment StoreEntitySet="ProjectInfo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="link" ColumnName="link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RealEstateInfoes">
+            <EntityTypeMapping TypeName="RealEstateManagementModel.RealEstateInfo">
+              <MappingFragment StoreEntitySet="RealEstateInfo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="typeRealEstate" ColumnName="typeRealEstate" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="descriptRealEstate" ColumnName="descriptRealEstate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="locationRealEstate" ColumnName="locationRealEstate" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="timepost" ColumnName="timepost" />
+                <ScalarProperty Name="addressRealEstate" ColumnName="addressRealEstate" />
+                <ScalarProperty Name="streetWidth" ColumnName="streetWidth" />
+                <ScalarProperty Name="orientation" ColumnName="orientation" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="lenght" ColumnName="lenght" />
+                <ScalarProperty Name="floors" ColumnName="floors" />
+                <ScalarProperty Name="bedrooms" ColumnName="bedrooms" />
+                <ScalarProperty Name="toilets" ColumnName="toilets" />
+                <ScalarProperty Name="furniture" ColumnName="furniture" />
+                <ScalarProperty Name="legalDocument" ColumnName="legalDocument" />
+                <ScalarProperty Name="projectId" ColumnName="projectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
