@@ -11,8 +11,13 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
              DataContext="{StaticResource HomepageVM}"
-             d:DesignHeight="420" d:DesignWidth="635">
-    
+             d:DesignHeight="640" d:DesignWidth="987">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedUserControlsCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <!-- grid chính-->
     <Grid Background="Transparent">
         <!--Main content-->
@@ -20,7 +25,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <!--slide show-->
         <Grid Grid.Row="0">
             <Image Width="auto"
@@ -32,13 +37,14 @@
         <!--mục tìm kiếm-->
         <Grid Grid.Row="1">
             <Grid Width="auto"
-                  Height="150"
+                  Height="250"
                   Margin="30 0 30 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="1.5*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <!--Loại cần tìm là bán hay thuê-->
                 <Grid Grid.Row="0"
                       x:Name="gridCatogariesFind"
@@ -63,26 +69,26 @@
                                 HorizontalAlignment="Left"
                             Margin="210 0 0 0"
                             VerticalAlignment="Bottom"
-                            Content="Nhà Cho Thuê" Foreground="#DD000000"
-                                ></Button>
+                            Content="Nhà Cho Thuê" Foreground="#DD000000"></Button>
                 </Grid>
-                
+
                 <!--grid chứa các filter tìm kiếm-->
                 <Grid Grid.Row="1"
                       Margin="0"
-                      Background="#E5000000"
+                      Background="Black"
                       ShowGridLines="False">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    
+
                     <!--grid chứa ô tìm kiếm-->
                     <Grid Grid.Row="0">
                         <Grid Margin="10"
                               Background="White">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1"></ColumnDefinition>
                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
@@ -90,39 +96,31 @@
                             <!--Loại bất động sản-->
                             <Grid Grid.Column="0">
                                 <ComboBox   materialDesign:HintAssist.Hint="Loại bất động sản"
-                                            HorizontalContentAlignment="Center"
+                                            HorizontalContentAlignment="Left"
                                             VerticalContentAlignment="Center"
                                             IsEditable="True"
-                                            materialDesign:HintAssist.HintOpacity=".26">
-                                    <ComboBoxItem>
-                                        Apple
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Banana
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Pear
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Orange
-                                    </ComboBoxItem>
+                                            Padding="20 5 5 5"
+                                            materialDesign:HintAssist.HintOpacity=".26"
+                                            ItemsSource="{Binding ListTypeSellRE}">
                                 </ComboBox>
                             </Grid>
 
                             <!--ô tìm kiếm-->
-                            <Grid Grid.Column="1"
+                            <Grid Grid.Column="2"
                                   Margin="5 0 0 0">
-                                <TextBox x:Name="CommentTextBox"
+                                <ComboBox x:Name="CommentTextBox"
+                                          IsEditable="True"
+                                          IsTextSearchEnabled="True"
                                          VerticalContentAlignment="Center"
                                      materialDesign:HintAssist.Hint="Nhập địa điểm hoặc dự án..." />
                             </Grid>
 
                             <!--nút tìm kiếm-->
-                            <Grid Grid.Column="2">
+                            <Grid Grid.Column="3">
                                 <Button 
                                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                     Width="auto"
-                                    Margin="0"
+                                    Margin="2"
                                     Padding="0"
                                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                                     Background="Beige" 
@@ -133,7 +131,7 @@
                             </Grid>
                         </Grid>
                     </Grid>
-                    
+
                     <!--Các filter tìm kiếm-->
                     <Grid Grid.Row="1" >
                         <Grid Margin="10 0 10 10">
@@ -142,39 +140,33 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            
+
                             <!--Khu vực-->
                             <Grid Grid.Column="0">
-                                <ComboBox   materialDesign:HintAssist.Hint="Toàn Quốc"
+                                <ComboBox   materialDesign:HintAssist.Hint="Tỉnh Thành"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
-                                            Background="Transparent"
+                                            Background="Black"
                                             Foreground="White"
                                             BorderBrush="White"
                                             BorderThickness="1"
                                             Margin="4"
                                             IsEditable="True"
-                                            materialDesign:HintAssist.HintOpacity="1">
-                                    <ComboBoxItem>
-                                        Apple
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Banana
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Pear
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Orange
-                                    </ComboBoxItem>
+                                            IsTextSearchEnabled="True"
+                                            materialDesign:HintAssist.HintOpacity="1"
+                                            ItemsSource="{Binding ListLocation}">
+                                    <ComboBox.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ComboBoxItem}">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Style>
+                                    </ComboBox.ItemContainerStyle>
                                 </ComboBox>
                             </Grid>
-                            
+
                             <!--Loại-->
                             <Grid Grid.Column="1">
-                                <ComboBox   materialDesign:HintAssist.Hint="Tất Cả"
+                                <ComboBox   materialDesign:HintAssist.Hint="Giá"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
                                             Background="Transparent"
@@ -183,25 +175,19 @@
                                             BorderThickness="1"
                                             Margin="4"
                                             IsEditable="True"
-                                             materialDesign:HintAssist.HintOpacity="1">
-                                    <ComboBoxItem>
-                                        Apple
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Banana
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Pear
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Orange
-                                    </ComboBoxItem>
+                                            ItemsSource="{Binding ListPrice}"
+                                            materialDesign:HintAssist.HintOpacity="1">
+                                    <ComboBox.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ComboBoxItem}">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Style>
+                                    </ComboBox.ItemContainerStyle>
                                 </ComboBox>
                             </Grid>
-                            
+
                             <!--Diện tích-->
                             <Grid Grid.Column="2">
-                                <ComboBox   materialDesign:HintAssist.Hint="Diện Tích"
+                                <ComboBox   materialDesign:HintAssist.Hint="Diện tích"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
                                             Background="Transparent"
@@ -209,24 +195,19 @@
                                             BorderBrush="White"
                                             BorderThickness="1"
                                             Margin="4"
+                                            ItemsSource="{Binding ListArea}"
                                             IsEditable="True"
                                              materialDesign:HintAssist.HintOpacity="1">
-                                    <ComboBoxItem>
-                                        Apple
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Banana
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Pear
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Orange
-                                    </ComboBoxItem>
+                                    <ComboBox.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ComboBoxItem}">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Style>
+                                    </ComboBox.ItemContainerStyle>
                                 </ComboBox>
                             </Grid>
-                            
+
                             <!--Dự án-->
+                            <!--
                             <Grid Grid.Column="3">
                                 <ComboBox   materialDesign:HintAssist.Hint="Dự Án"
                                             HorizontalContentAlignment="Center"
@@ -251,11 +232,65 @@
                                         Orange
                                     </ComboBoxItem>
                                 </ComboBox>
-                            </Grid>
-                            
+                            </Grid>-->
+
                             <!--Lọc thêm-->
                             <Grid Grid.Column="4">
-                                <ComboBox   materialDesign:HintAssist.Hint="Lọc Thên"
+                                <Button Background="Transparent"
+                                        Foreground="White"
+                                        BorderBrush="Transparent"
+                                        Command="{Binding ClickMoreFilterCommand}"
+                                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                        Padding="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Settings" 
+                                                                 HorizontalAlignment="Center"
+                                                                 VerticalAlignment="Center"
+                                                                 Width="20"
+                                                                 Height="20"/>
+                                        <TextBlock Text="Lọc Thêm" Margin="10 0 0 0"></TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <!--Lọc thêm-->
+                <Grid Grid.Row="2" Background="Black" x:Name="gridLocThem"
+                      Visibility="{Binding VisibleGridMoreFilter}">
+                    <Grid Margin="10 0 10 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <!--Khu vực-->
+                        <Grid Grid.Column="0">
+                            <ComboBox   materialDesign:HintAssist.Hint="Quận / Huyện"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Background="Black"
+                                            Foreground="White"
+                                            BorderBrush="White"
+                                            BorderThickness="1"
+                                            Margin="4"
+                                            IsEditable="True"
+                                            IsTextSearchEnabled="True"
+                                            materialDesign:HintAssist.HintOpacity="1"
+                                            ItemsSource="{Binding ListLocation}">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+                        </Grid>
+
+                        <!--Loại-->
+                        <Grid Grid.Column="1">
+                            <ComboBox   materialDesign:HintAssist.Hint="Phường / Xã"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
                                             Background="Transparent"
@@ -264,21 +299,35 @@
                                             BorderThickness="1"
                                             Margin="4"
                                             IsEditable="True"
+                                            ItemsSource="{Binding ListPrice}"
+                                            materialDesign:HintAssist.HintOpacity="1">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+                        </Grid>
+
+                        <!--Diện tích-->
+                        <Grid Grid.Column="2">
+                            <ComboBox   materialDesign:HintAssist.Hint="Đường / Phố"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Background="Transparent"
+                                            Foreground="White"
+                                            BorderBrush="White"
+                                            BorderThickness="1"
+                                            Margin="4"
+                                            ItemsSource="{Binding ListArea}"
+                                            IsEditable="True"
                                              materialDesign:HintAssist.HintOpacity="1">
-                                    <ComboBoxItem>
-                                        Apple
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Banana
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Pear
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Orange
-                                    </ComboBoxItem>
-                                </ComboBox>
-                            </Grid>
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
                         </Grid>
                     </Grid>
                 </Grid>

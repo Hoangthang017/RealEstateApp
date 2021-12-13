@@ -14,7 +14,7 @@
         x:Name="_MainWindow"
         DataContext="{StaticResource MainVM}"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="510" Width="900">
+        Title="MainWindow" Height="670" Width="1240">
     
     <!--lấy sự kiện load window để show trang chủ-->
     <i:Interaction.Triggers>
