@@ -6,4 +6,5 @@
     <viewmodel:PurchaseViewModel x:Key="PuchaseVM" ></viewmodel:PurchaseViewModel>
     <viewmodel:RentViewModel x:Key="RentVM" ></viewmodel:RentViewModel>
     <viewmodel:ProjectViewModel x:Key="ProjectVM"></viewmodel:ProjectViewModel>
+    <viewmodel:DetailViewModel x:Key="DetailVM"></viewmodel:DetailViewModel>
 </ResourceDictionary>

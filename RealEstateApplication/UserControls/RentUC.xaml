@@ -7,21 +7,26 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-            TextElement.FontWeight="Regular"
+            TextElement.FontWeight="DemiBold"
             TextElement.FontSize="13"
             TextOptions.TextFormattingMode="Ideal"
             TextOptions.TextRenderingMode="Auto"
             x:Name="_RentUC"
             DataContext="{StaticResource RentVM}"
-            d:DesignHeight="480" d:DesignWidth="715">
-    
+            d:DesignHeight="640" d:DesignWidth="987">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedUserControlsCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <!--Grid main uc-->
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
+
         <!--Thanh tìm kiếm-->
         <Grid Grid.Row="0">
             <Grid
@@ -32,7 +37,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <!--Thanh tìm kiếm-->
                 <Grid Grid.Row="0">
                     <Grid Margin="5"
@@ -42,44 +47,45 @@
                             <ColumnDefinition Width="4*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
+
                         <!--Loại bất động sản-->
                         <Grid Grid.Column="0">
                             <ComboBox   materialDesign:HintAssist.Hint="Loại bất động sản"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
                                             IsEditable="True"
-                                            materialDesign:HintAssist.HintOpacity=".26">
-                                <ComboBoxItem>
-                                    Apple
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Banana
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Pear
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Orange
-                                </ComboBoxItem>
+                                            materialDesign:HintAssist.HintOpacity=".26"
+                                            ItemsSource="{Binding ListTypeSellRE}"
+                                            SelectedValue="{Binding DisplayTypeRE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding DisplayTypeRE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectionChangedTypeRECommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ComboBox>
                         </Grid>
+
                         <!--Ô tìm kiếm-->
                         <Grid Grid.Column="1"
                                   Margin="5 0 0 0">
                             <TextBox x:Name="CommentTextBox"
-                                         VerticalContentAlignment="Center"
-                                     materialDesign:HintAssist.Hint="Nhập địa điểm hoặc dự án..." />
+                                     Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     VerticalContentAlignment="Center"
+                                     materialDesign:HintAssist.Hint="Nhập tên dự án...">
+                            </TextBox>
                         </Grid>
+
                         <!--Nút tìm kiếm-->
                         <Grid Grid.Column="2">
-                            <Button 
+                            <Button Command="{Binding ClickSearchRECommand}"
                                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                     Width="auto"
-                                    Margin="2"
+                                    Margin="0"
                                     Padding="0"
                                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                                     Background="Beige" 
-                                    BorderBrush="Beige"
+                                    BorderBrush="Transparent"
                                     Foreground="Black">
                                 Tìm Kiếm
                             </Button>
@@ -87,8 +93,8 @@
                     </Grid>
 
                 </Grid>
-                
-                <!--Các ô filter-->
+
+                <!--thanh filter-->
                 <Grid Grid.Row="1" >
                     <Grid Margin="5 0 5 5">
                         <Grid.ColumnDefinitions>
@@ -96,38 +102,40 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
-                        <!--Toàm quốc-->
+
+                        <!--Khu vực-->
                         <Grid Grid.Column="0">
-                            <ComboBox   materialDesign:HintAssist.Hint="Toàn Quốc"
+                            <ComboBox   materialDesign:HintAssist.Hint="Tỉnh Thành"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
-                                            Background="Transparent"
+                                            Background="Black"
                                             Foreground="White"
                                             BorderBrush="White"
                                             BorderThickness="1"
                                             Margin="4"
                                             IsEditable="True"
-                                            materialDesign:HintAssist.HintOpacity="1">
-                                <ComboBoxItem>
-                                    Apple
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Banana
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Pear
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Orange
-                                </ComboBoxItem>
+                                            IsTextSearchEnabled="True"
+                                            materialDesign:HintAssist.HintOpacity="1"
+                                            ItemsSource="{Binding ListLocation}"
+                                            SelectedValue="{Binding DisplayCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding DisplayCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectionChangedCityCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ComboBox>
                         </Grid>
+
                         <!--Tất cả-->
                         <Grid Grid.Column="1">
-                            <ComboBox   materialDesign:HintAssist.Hint="Tất Cả"
+                            <ComboBox   materialDesign:HintAssist.Hint="Giá"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
                                             Background="Transparent"
@@ -136,24 +144,26 @@
                                             BorderThickness="1"
                                             Margin="4"
                                             IsEditable="True"
-                                             materialDesign:HintAssist.HintOpacity="1">
-                                <ComboBoxItem>
-                                    Apple
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Banana
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Pear
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Orange
-                                </ComboBoxItem>
+                                            ItemsSource="{Binding ListPrice}"
+                                            SelectedValue="{Binding DisplayPrice, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding DisplayPrice, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            materialDesign:HintAssist.HintOpacity="1">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectionChangedPriceCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ComboBox>
                         </Grid>
+
                         <!--Diện tích-->
                         <Grid Grid.Column="2">
-                            <ComboBox   materialDesign:HintAssist.Hint="Diện Tích"
+                            <ComboBox   materialDesign:HintAssist.Hint="Diện tích"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
                                             Background="Transparent"
@@ -161,23 +171,26 @@
                                             BorderBrush="White"
                                             BorderThickness="1"
                                             Margin="4"
+                                            ItemsSource="{Binding ListArea}"
+                                            SelectedValue="{Binding DisplayArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding DisplayArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             IsEditable="True"
                                              materialDesign:HintAssist.HintOpacity="1">
-                                <ComboBoxItem>
-                                    Apple
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Banana
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Pear
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Orange
-                                </ComboBoxItem>
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectionChangedAreaCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ComboBox>
                         </Grid>
-                        <!--Dự án-->
+
+                        <!--Dự Án-->
+                        <!--
                         <Grid Grid.Column="3">
                             <ComboBox   materialDesign:HintAssist.Hint="Dự Án"
                                             HorizontalContentAlignment="Center"
@@ -189,592 +202,277 @@
                                             Margin="4"
                                             IsEditable="True"
                                              materialDesign:HintAssist.HintOpacity="1">
-                                <ComboBoxItem>
-                                    Apple
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Banana
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Pear
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Orange
-                                </ComboBoxItem>
+                               
                             </ComboBox>
-                        </Grid>
-                        <!--Lọc tjêm-->
-                        <Grid Grid.Column="4">
-                            <ComboBox   materialDesign:HintAssist.Hint="Lọc Thên"
-                                            HorizontalContentAlignment="Center"
-                                            VerticalContentAlignment="Center"
-                                            Background="Transparent"
-                                            Foreground="White"
-                                            BorderBrush="White"
-                                            BorderThickness="1"
-                                            Margin="4"
-                                            IsEditable="True"
-                                             materialDesign:HintAssist.HintOpacity="1">
-                                <ComboBoxItem>
-                                    Apple
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Banana
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Pear
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Orange
-                                </ComboBoxItem>
-                            </ComboBox>
+                        </Grid>-->
+
+                        <!--Lọc Thêm-->
+                        <Grid Grid.Column="3">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Background="Red"
+                                        Foreground="White"
+                                        BorderBrush="Red"
+                                        Width="120"
+                                        Margin="0 0 10 0"
+                                        Command="{Binding DeleteFilterCommand}"
+                                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                        Padding="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="FilterOff" 
+                                                                 HorizontalAlignment="Center"
+                                                                 VerticalAlignment="Center"
+                                                                 Width="20"
+                                                                 Height="20"/>
+                                        <TextBlock Text="Xoá bộ lọc" Margin="10 0 0 0"></TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Background="Transparent"
+                                        Foreground="White"
+                                        BorderBrush="Transparent"
+                                        Command="{Binding ClickMoreFilterCommand}"
+                                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                        Padding="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Settings" 
+                                                                 HorizontalAlignment="Center"
+                                                                 VerticalAlignment="Center"
+                                                                 Width="20"
+                                                                 Height="20"/>
+                                        <TextBlock Text="Lọc Thêm" Margin="10 0 0 0"></TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
         </Grid>
-        <!--grid kết quả trả về-->
+
+        <!--Grid ô sắp xếp theo và kết quả trả về-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <!--số kết quả trả về và sắp xếp theo-->
+
+            <!--Grid ô sắp xếp theo và số kết quả trả về-->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"></RowDefinition>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <!--Số kết quả trả về và sắp xếp theo-->
+
+                <!--số két quả trả về là sắp xếp theo-->
                 <Grid Grid.Column="0">
-                    <!--số kết quả trả về-->
-                    <TextBlock HorizontalAlignment="Left"
+                    <!-- số kết quả trả về-->
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="Left"
                                Width="auto"
-                               Text="Có 111 kết quả phù hợp"
+                               Text="Có "
                                VerticalAlignment="Center"
                                Margin="30 0 0 0">
 
-                    </TextBlock>
-                    <!--sắp xếp theo-->
+                        </TextBlock>
+                        <TextBlock HorizontalAlignment="Left"
+                               Width="auto"
+                               Text="{Binding ListViewQueryRE.Count}"
+                               VerticalAlignment="Center"
+                               Foreground="Orange">
+
+                        </TextBlock>
+                        <TextBlock HorizontalAlignment="Left"
+                               Width="auto"
+                               Text=" kết quả phù hợp"
+                               VerticalAlignment="Center">
+
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!--Sắp xếp theo-->
                     <ComboBox materialDesign:HintAssist.Hint="Sắp xếp theo"
-                              IsEditable="True"
+                              IsEditable="False"
                               HorizontalAlignment="Right"
                               HorizontalContentAlignment="Center"
                               IsReadOnly="True"
                               Margin="0 0 30 0"
+                              ItemsSource="{Binding ListFilter}"
+                              SelectedValue="{Binding DisplayFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                        <ComboBoxItem
-                            IsSelected="True">
-                            Mới Nhất
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Giá Cao Nhất
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Giá Thấp Nhất
-                        </ComboBoxItem>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChangedFilterCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </ComboBox>
                 </Grid>
-                <!--các kết quả tìm được-->
+
+                <!--Các kết quả tìm được-->
                 <Grid Grid.Row="1">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel Margin="0 10 0 0">
-                            <!--sử dụng srollbar -->
-                            <Grid Width="auto"
-                              Background="Beige"
-                              Margin="2"
-                              Height="100">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <!--hình-->
-                                <Grid Grid.Column="0">
-                                    <Image Source="132800820099556964-380x190.jpg"
-                                       Stretch="Fill"></Image>
-                                </Grid>
-                                <!--Thông tin-->
-                                <Grid Grid.Column="1"
-                                  Margin="10 0 10 0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="5*"></RowDefinition>
-                                        <RowDefinition Height="3*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="2*"></RowDefinition>
-                                    </Grid.RowDefinitions>
+                    <DataGrid Background="Transparent"
+                            SelectedValue="{Binding DisplayRE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding ListViewQueryRE}"
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            CanUserSortColumns="True"
+                            HeadersVisibility="None"
+                            CanUserAddRows="False"
+                            AutoGenerateColumns="False">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedCellsChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectedCellsChangedRECommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn
+                                    IsReadOnly="False"
+                                    Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <materialDesign:Card Width="auto" 
+                                              Background="Beige"
+                                              Padding="2"
+                                              Height="100">
+                                            <Grid >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
 
-                                    <!--tiêu đề -->
-                                    <Grid Grid.Row="0">
-                                        <TextBlock Text="Cho thuê căn hộ vinhomes grand park quận 9. giỏ hàng đa dạng các toà, tầng, 1pn, 2pn, 3pn"
+                                                <!--hình-->
+                                                <Grid Grid.Column="0">
+                                                    <Image Source="{Binding imageSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                   Stretch="Fill"></Image>
+                                                </Grid>
+
+                                                <!--Thông tin nhà bán-->
+                                                <Grid Grid.Column="1"
+                                  Margin="10 0 10 0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="5*"></RowDefinition>
+                                                        <RowDefinition Height="3*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="2*"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+
+                                                    <!--tiêu đề-->
+                                                    <Grid Grid.Row="0">
+                                                        <TextBlock Text="{Binding title}"
                                                FontWeight="Bold"
                                                FontSize="14"
                                                VerticalAlignment="Center"
                                                TextWrapping="Wrap"></TextBlock>
-                                    </Grid>
-                                    <!--Giá và thời gian-->
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <!--giá-->
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="$ GIÁ : 4 TRIỆU/THÁNG"
+                                                    </Grid>
+
+                                                    <!--Giá và thời gian-->
+                                                    <Grid Grid.Row="1">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <!--giá-->
+                                                        <Grid Grid.Column="0">
+                                                            <StackPanel Orientation="Horizontal"
+                                                                        Margin="20 0 0 0">
+                                                                <TextBlock Text="$ GIÁ : "
                                                FontWeight="Bold"
                                                VerticalAlignment="Center"
                                                Foreground="Red"
                                                FontSize="18"
                                                TextWrapping="Wrap"></TextBlock>
-                                        </Grid>
-                                        <!--thời gian-->
-                                        <Grid Grid.Column="1">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="Clock" 
-                                                                     HorizontalAlignment="Center"
-                                                                     VerticalAlignment="Center"/>
-                                                <TextBlock Text="15 ngày trước"
-                                                       Margin="10 0 0 0"
-                                               FontSize="11"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Grid>
-                                    <!--Thanh chia-->
-                                    <Grid Grid.Row="2">
-                                        <Separator Margin="20 0 20 0"
-                                               Height="5"></Separator>
-                                    </Grid>
-                                    <!--Diện tích và địa chỉ-->
-                                    <Grid Grid.Row="3">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <!--diện tích-->
-                                        <Grid Grid.Column="0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="MoveResize" 
-                                                                     VerticalAlignment="Center"
-                                                                     HorizontalAlignment="Center"/>
-                                                <TextBlock Text="Diện Tích: 42 M2"
-                                                       Margin="10 0 0 0"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                        <!--địa chỉ-->
-                                        <Grid Grid.Column="1">
-                                            <StackPanel Orientation="Horizontal"
-                                                    HorizontalAlignment="Right">
-                                                <materialDesign:PackIcon Kind="CrosshairsGps" 
-                                                                     VerticalAlignment="Center"
-                                                                     HorizontalAlignment="Center"/>
-                                                <TextBlock Text="Quận/Huyện: Quận 9, TP Hồ Chí Minh"
-                                                       HorizontalAlignment="Right"
-                                                       Margin="10 0 0 0"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid Width="auto"
-                              Background="Beige"
-                              Margin="2"
-                              Height="100">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <!--hình-->
-                                <Grid Grid.Column="0">
-                                    <Image Source="132800820099556964-380x190.jpg"
-                                       Stretch="Fill"></Image>
-                                </Grid>
-                                <!--Thông tin-->
-                                <Grid Grid.Column="1"
-                                  Margin="10 0 10 0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="5*"></RowDefinition>
-                                        <RowDefinition Height="3*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="2*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-
-                                    <!--tiêu đề -->
-                                    <Grid Grid.Row="0">
-                                        <TextBlock Text="Cho thuê căn hộ vinhomes grand park quận 9. giỏ hàng đa dạng các toà, tầng, 1pn, 2pn, 3pn"
-                                               FontWeight="Bold"
-                                               FontSize="14"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                    </Grid>
-                                    <!--Giá và thời gian-->
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <!--giá-->
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="$ GIÁ : 4 TRIỆU/THÁNG"
+                                                                <TextBlock Text="{Binding price}"
                                                FontWeight="Bold"
                                                VerticalAlignment="Center"
                                                Foreground="Red"
                                                FontSize="18"
                                                TextWrapping="Wrap"></TextBlock>
-                                        </Grid>
-                                        <!--thời gian-->
-                                        <Grid Grid.Column="1">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="Clock" 
-                                                                     HorizontalAlignment="Center"
-                                                                     VerticalAlignment="Center"/>
-                                                <TextBlock Text="15 ngày trước"
-                                                       Margin="10 0 0 0"
-                                               FontSize="11"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Grid>
-                                    <!--Thanh chia-->
-                                    <Grid Grid.Row="2">
-                                        <Separator Margin="20 0 20 0"
-                                               Height="5"></Separator>
-                                    </Grid>
-                                    <!--Diện tích và địa chỉ-->
-                                    <Grid Grid.Row="3">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <!--diện tích-->
-                                        <Grid Grid.Column="0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="MoveResize" 
-                                                                     VerticalAlignment="Center"
-                                                                     HorizontalAlignment="Center"/>
-                                                <TextBlock Text="Diện Tích: 42 M2"
-                                                       Margin="10 0 0 0"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                        <!--địa chỉ-->
-                                        <Grid Grid.Column="1">
-                                            <StackPanel Orientation="Horizontal"
-                                                    HorizontalAlignment="Right">
-                                                <materialDesign:PackIcon Kind="CrosshairsGps" 
-                                                                     VerticalAlignment="Center"
-                                                                     HorizontalAlignment="Center"/>
-                                                <TextBlock Text="Quận/Huyện: Quận 9, TP Hồ Chí Minh"
-                                                       HorizontalAlignment="Right"
-                                                       Margin="10 0 0 0"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid Width="auto"
-                              Background="Beige"
-                              Margin="2"
-                              Height="100">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <!--hình-->
-                                <Grid Grid.Column="0">
-                                    <Image Source="132800820099556964-380x190.jpg"
-                                       Stretch="Fill"></Image>
-                                </Grid>
-                                <!--Thông tin-->
-                                <Grid Grid.Column="1"
-                                  Margin="10 0 10 0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="5*"></RowDefinition>
-                                        <RowDefinition Height="3*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="2*"></RowDefinition>
-                                    </Grid.RowDefinitions>
+                                                            </StackPanel>
 
-                                    <!--tiêu đề -->
-                                    <Grid Grid.Row="0">
-                                        <TextBlock Text="Cho thuê căn hộ vinhomes grand park quận 9. giỏ hàng đa dạng các toà, tầng, 1pn, 2pn, 3pn"
-                                               FontWeight="Bold"
-                                               FontSize="14"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                    </Grid>
-                                    <!--Giá và thời gian-->
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <!--giá-->
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="$ GIÁ : 4 TRIỆU/THÁNG"
-                                               FontWeight="Bold"
-                                               VerticalAlignment="Center"
-                                               Foreground="Red"
-                                               FontSize="18"
-                                               TextWrapping="Wrap"></TextBlock>
-                                        </Grid>
-                                        <!--thời gian-->
-                                        <Grid Grid.Column="1">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="Clock" 
-                                                                     HorizontalAlignment="Center"
-                                                                     VerticalAlignment="Center"/>
-                                                <TextBlock Text="15 ngày trước"
-                                                       Margin="10 0 0 0"
-                                               FontSize="11"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Grid>
-                                    <!--Thanh chia-->
-                                    <Grid Grid.Row="2">
-                                        <Separator Margin="20 0 20 0"
-                                               Height="5"></Separator>
-                                    </Grid>
-                                    <!--Diện tích và địa chỉ-->
-                                    <Grid Grid.Row="3">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <!--diện tích-->
-                                        <Grid Grid.Column="0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="MoveResize" 
-                                                                     VerticalAlignment="Center"
-                                                                     HorizontalAlignment="Center"/>
-                                                <TextBlock Text="Diện Tích: 42 M2"
-                                                       Margin="10 0 0 0"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                        <!--địa chỉ-->
-                                        <Grid Grid.Column="1">
-                                            <StackPanel Orientation="Horizontal"
-                                                    HorizontalAlignment="Right">
-                                                <materialDesign:PackIcon Kind="CrosshairsGps" 
-                                                                     VerticalAlignment="Center"
-                                                                     HorizontalAlignment="Center"/>
-                                                <TextBlock Text="Quận/Huyện: Quận 9, TP Hồ Chí Minh"
-                                                       HorizontalAlignment="Right"
-                                                       Margin="10 0 0 0"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid Width="auto"
-                              Background="Beige"
-                              Margin="2"
-                              Height="100">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <!--hình-->
-                                <Grid Grid.Column="0">
-                                    <Image Source="132800820099556964-380x190.jpg"
-                                       Stretch="Fill"></Image>
-                                </Grid>
-                                <!--Thông tin-->
-                                <Grid Grid.Column="1"
-                                  Margin="10 0 10 0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="5*"></RowDefinition>
-                                        <RowDefinition Height="3*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="2*"></RowDefinition>
-                                    </Grid.RowDefinitions>
+                                                        </Grid>
 
-                                    <!--tiêu đề -->
-                                    <Grid Grid.Row="0">
-                                        <TextBlock Text="Cho thuê căn hộ vinhomes grand park quận 9. giỏ hàng đa dạng các toà, tầng, 1pn, 2pn, 3pn"
-                                               FontWeight="Bold"
-                                               FontSize="14"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                    </Grid>
-                                    <!--Giá và thời gian-->
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <!--giá-->
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="$ GIÁ : 4 TRIỆU/THÁNG"
-                                               FontWeight="Bold"
-                                               VerticalAlignment="Center"
-                                               Foreground="Red"
-                                               FontSize="18"
-                                               TextWrapping="Wrap"></TextBlock>
-                                        </Grid>
-                                        <!--thời gian-->
-                                        <Grid Grid.Column="1">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="Clock" 
+                                                        <!--Thời gian-->
+                                                        <Grid Grid.Column="1">
+                                                            <StackPanel Orientation="Horizontal"
+                                                                        HorizontalAlignment="Right">
+                                                                <materialDesign:PackIcon Kind="Clock" 
                                                                      HorizontalAlignment="Center"
                                                                      VerticalAlignment="Center"/>
-                                                <TextBlock Text="15 ngày trước"
-                                                       Margin="10 0 0 0"
+                                                                <TextBlock Text="{Binding timepost}"
+                                                       Margin="0 0 0 0"
                                                FontSize="11"
                                                HorizontalAlignment="Right"
                                                VerticalAlignment="Center"
                                                TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Grid>
-                                    <!--Thanh chia-->
-                                    <Grid Grid.Row="2">
-                                        <Separator Margin="20 0 20 0"
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <!--thanh chia-->
+                                                    <Grid Grid.Row="2">
+                                                        <Separator Margin="20 0 20 0"
                                                Height="5"></Separator>
-                                    </Grid>
-                                    <!--Diện tích và địa chỉ-->
-                                    <Grid Grid.Row="3">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <!--diện tích-->
-                                        <Grid Grid.Column="0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="MoveResize" 
+                                                    </Grid>
+
+                                                    <!--Địa chỉ và diện tích-->
+                                                    <Grid Grid.Row="3">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <!--Địa chỉ-->
+                                                        <Grid Grid.Column="0">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <materialDesign:PackIcon Kind="MoveResize" 
                                                                      VerticalAlignment="Center"
                                                                      HorizontalAlignment="Center"/>
-                                                <TextBlock Text="Diện Tích: 42 M2"
-                                                       Margin="10 0 0 0"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                        <!--địa chỉ-->
-                                        <Grid Grid.Column="1">
-                                            <StackPanel Orientation="Horizontal"
+                                                                <TextBlock
+                                                                        Margin="10 0 0 0"
+                                                                        HorizontalAlignment="Right"
+                                                                        VerticalAlignment="Center">
+                                                                    <Run Text="Diện tích: "></Run>
+                                                                    <Run Text="{Binding area}"></Run>
+                                                                </TextBlock>
+                                                                <TextBlock Text="{Binding squareRoot}">
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </Grid>
+
+                                                        <!--Diện tích-->
+                                                        <Grid Grid.Column="1">
+                                                            <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Right">
-                                                <materialDesign:PackIcon Kind="CrosshairsGps" 
+                                                                <materialDesign:PackIcon Kind="CrosshairsGps" 
                                                                      VerticalAlignment="Center"
                                                                      HorizontalAlignment="Center"/>
-                                                <TextBlock Text="Quận/Huyện: Quận 9, TP Hồ Chí Minh"
+                                                                <TextBlock Text="Quận/Huyện: "
                                                        HorizontalAlignment="Right"
                                                        Margin="10 0 0 0"
                                                VerticalAlignment="Center"
                                                TextWrapping="Wrap"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </StackPanel>
-                    </ScrollViewer>
+                                                                <TextBlock Text="{Binding locationRealEstate}">
+
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </materialDesign:Card>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
                 </Grid>
             </Grid>
-            
-            <!--Than kiếm tím theo khoảng-->
+
+            <!--Grid tìm kiếm theo chỉ định-->
             <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                
-                <!--Tìm kiếm theo khoảng giá-->
-                <Grid Grid.Row="0">
-                    <StackPanel Margin="5 2 5 2">
-                        <!--style list nút-->
-                        <StackPanel.Resources>
-                            <Style TargetType="Button" x:Key="btnPriceRange">
-                                <Setter Property="Background" Value="Transparent"></Setter>
-                                <Setter Property="BorderBrush" Value="Transparent"></Setter>
-                                <Setter Property="Foreground" Value="Black"></Setter>
-                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                                <Setter Property="Width" Value="auto"></Setter>
-                            </Style>
-                        </StackPanel.Resources>
-                        <!--tiêu đề-->
-                        <TextBlock Text="Tìm Theo Khoảng Giá"
-                                   FontWeight="Bold"
-                                   Foreground="Black"></TextBlock>
-                        <!--Thanh chia-->
-                        <Separator Height="3"></Separator>
-                        <!--List nút-->
-                        <Button Content="Dưới 1 Triệu" 
-                                    Width="auto"
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="3 tới 5 Triệu" 
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="5 tới 10 Triệu" 
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="10 tới 40 Triệu" 
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="40 tới 70 Triệu" 
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="70 tới 100 Triệu" 
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="trên 100 Triệu" 
-                            Style="{StaticResource btnPriceRange}"></Button>
-                    </StackPanel>
-                </Grid>
-                
-                <!--Tìm kiếm theo khoảng diện tích-->
-                <Grid Grid.Row="1">
-                    <StackPanel Margin="5 2 5 2">
-                        <!--Style mấy nút bên dưới -->
-                        <StackPanel.Resources>
-                            <Style TargetType="Button" x:Key="btnPriceRange">
-                                <Setter Property="Background" Value="Transparent"></Setter>
-                                <Setter Property="BorderBrush" Value="Transparent"></Setter>
-                                <Setter Property="Foreground" Value="Black"></Setter>
-                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                                <Setter Property="Width" Value="auto"></Setter>
-                            </Style>
-                        </StackPanel.Resources>
-                        <!--Tiêu đề-->
-                        <TextBlock Text="Tìm Theo Diện Tích"
-                                   FontWeight="Bold"
-                                   Foreground="Black"></TextBlock>
-                        <!--Thanh chia-->
-                        <Separator Height="3"></Separator>
-                        <!--List nút-->
-                        <Button Content="Dưới 30 m2" 
-                                    Width="auto"
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="Từ 30 đên 50 m2" 
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="Từ 50 đên 80 m2" 
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="Từ 80 đên 100 m2"
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="Từ 100 đên 150 m2"
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="Từ 150 đên 300 m2" 
-                            Style="{StaticResource btnPriceRange}"></Button>
-                        <Button Content="Trên 300 m2" 
-                            Style="{StaticResource btnPriceRange}"></Button>
-                    </StackPanel>
-                </Grid>
+                <Image 
+                    Margin="5 30 5 30"
+                    Source="/RealEstateApplication;component/Pictures/banner-2-1.jpg" Stretch="Fill"></Image>
             </Grid>
         </Grid>
     </Grid>
