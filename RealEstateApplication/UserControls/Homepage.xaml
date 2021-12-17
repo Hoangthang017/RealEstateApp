@@ -52,24 +52,29 @@
 
                     <!--nút mua bán-->
                     <Button Width="200"
-                                Padding="0"
-                                Background="#E5000000"
-                                BorderThickness="0"
-                                BorderBrush="#E5000000" 
+                            Command="{Binding ClickChangeEnableButtonCommand, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                            Background="{Binding BackgroudPurchase}"
+                            Foreground="{Binding ForegroundPurchase}"
+                            Padding="0"
+                            BorderThickness="0"
+                            BorderBrush="Transparent" 
                             HorizontalAlignment="Left"
                             VerticalAlignment="Bottom"
                             Content="Nhà Đất Mua / Bán"/>
 
                     <!-- nút cho thuê-->
                     <Button Width="200"
-                                Background="Beige"
-                            Opacity=".5"
-                                BorderThickness="0"
-                                BorderBrush="Beige" 
-                                HorizontalAlignment="Left"
+                            Command="{Binding ClickChangeEnableButtonCommand, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                            BorderThickness="0"
+                            Background="{Binding BackgroudRent}"
+                            BorderBrush="Transparent" 
+                            HorizontalAlignment="Left"
                             Margin="210 0 0 0"
                             VerticalAlignment="Bottom"
-                            Content="Nhà Cho Thuê" Foreground="#DD000000"></Button>
+                            Content="Nhà Cho Thuê" 
+                            Foreground="{Binding ForegroudRent}"></Button>
                 </Grid>
 
                 <!--grid chứa các filter tìm kiếm-->
@@ -87,7 +92,7 @@
                         <Grid Margin="10"
                               Background="White">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
                                 <ColumnDefinition Width="1"></ColumnDefinition>
                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -101,23 +106,50 @@
                                             IsEditable="True"
                                             Padding="20 5 5 5"
                                             materialDesign:HintAssist.HintOpacity=".26"
-                                            ItemsSource="{Binding ListTypeSellRE}">
+                                            ItemsSource="{Binding ListTypeSellRE}"
+                                            SelectedItem="{Binding DisplayTypeRE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectionChangedTypeRECommand}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
                                 </ComboBox>
                             </Grid>
 
                             <!--ô tìm kiếm-->
                             <Grid Grid.Column="2"
                                   Margin="5 0 0 0">
-                                <ComboBox x:Name="CommentTextBox"
+                                <!--<TextBox Margin="0 0 10 0" Background="Transparent" Opacity="0"
+                                         Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding TextChangedQueryCommand}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>-->
+                                <!--<ComboBox x:Name="CommentTextBox"
+                                          ItemsSource="{Binding ListViewQueryRE}"
+                                          SelectedItem="{Binding Query,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          DisplayMemberPath="title"
                                           IsEditable="True"
                                           IsTextSearchEnabled="True"
                                          VerticalContentAlignment="Center"
-                                     materialDesign:HintAssist.Hint="Nhập địa điểm hoặc dự án..." />
+                                     materialDesign:HintAssist.Hint="Nhập địa điểm hoặc dự án..." >
+                                    
+                                </ComboBox>-->
+                                <TextBox x:Name="CommentTextBox"
+                                         Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         VerticalContentAlignment="Center"
+                                     materialDesign:HintAssist.Hint="Nhập tên dự án ..." >
+
+                                </TextBox>
                             </Grid>
 
                             <!--nút tìm kiếm-->
                             <Grid Grid.Column="3">
                                 <Button 
+                                    Command="{Binding ClickSearchRECommand}"
                                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                     Width="auto"
                                     Margin="2"
@@ -155,12 +187,18 @@
                                             IsEditable="True"
                                             IsTextSearchEnabled="True"
                                             materialDesign:HintAssist.HintOpacity="1"
-                                            ItemsSource="{Binding ListLocation}">
+                                            ItemsSource="{Binding ListLocation}"
+                                            SelectedValue="{Binding DisplayCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ComboBox.ItemContainerStyle>
                                         <Style TargetType="{x:Type ComboBoxItem}">
                                             <Setter Property="Foreground" Value="Black"/>
                                         </Style>
                                     </ComboBox.ItemContainerStyle>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectionChangedCityCommand}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
                                 </ComboBox>
                             </Grid>
 
@@ -176,12 +214,18 @@
                                             Margin="4"
                                             IsEditable="True"
                                             ItemsSource="{Binding ListPrice}"
+                                            SelectedValue="{Binding DisplayPrice, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             materialDesign:HintAssist.HintOpacity="1">
                                     <ComboBox.ItemContainerStyle>
                                         <Style TargetType="{x:Type ComboBoxItem}">
                                             <Setter Property="Foreground" Value="Black"/>
                                         </Style>
                                     </ComboBox.ItemContainerStyle>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectionChangedPriceCommand}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
                                 </ComboBox>
                             </Grid>
 
@@ -196,6 +240,7 @@
                                             BorderThickness="1"
                                             Margin="4"
                                             ItemsSource="{Binding ListArea}"
+                                            SelectedValue="{Binding DisplayArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             IsEditable="True"
                                              materialDesign:HintAssist.HintOpacity="1">
                                     <ComboBox.ItemContainerStyle>
@@ -203,6 +248,11 @@
                                             <Setter Property="Foreground" Value="Black"/>
                                         </Style>
                                     </ComboBox.ItemContainerStyle>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectionChangedAreaCommand}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
                                 </ComboBox>
                             </Grid>
 

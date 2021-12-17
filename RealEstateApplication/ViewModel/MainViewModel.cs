@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RealEstateApplication.Model;
+using RealEstateApplication.UserControls;
 using System.Windows.Controls;
 using System.Windows.Input;
-using RealEstateApplication.Model;
-using RealEstateApplication.UserControls;
 
 namespace RealEstateApplication.ViewModel
 {
@@ -21,19 +16,16 @@ namespace RealEstateApplication.ViewModel
 
         // phương thức khởi tạo
         public MainViewModel()
-        {   
+        {
 
             // các commnad
             LoadedMainWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 // 1 lần duy nhất
-                OpenUC.GridOpenUC = (p as Grid);
+                OpenUC.BackupGridOpenUC = (p as Grid);
 
                 // truyền dữ liệu
-                var newHomePage = new Homepage();
-                var datacontext = (newHomePage.DataContext as HomepageViewModel);
-                datacontext.Query = "Test query";
-                OpenUC.OpenChildUC(newHomePage);
+                OpenUC.OpenChildUC(new Homepage());
 
                 //
                 Filter.CreateListData();
