@@ -119,7 +119,7 @@
                 Width="50"
                 Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
                 Visibility="{Binding isMoTab}">
-                <materialDesign:PackIcon Kind="ChevronUp" 
+                <materialDesign:PackIcon Kind="Support" 
                                          Width="40"  
                                          Height="40" 
                                          HorizontalAlignment="Center" 
@@ -168,86 +168,205 @@
             <Border BorderThickness="1"
                                 CornerRadius="10"
                                 BorderBrush="Black"
-                                Background="White">
-                <Grid Margin="5">
+                                Background="White" Margin="0,0,-317,0" HorizontalAlignment="Left" Width="517">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.4*"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="1.2*"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
                     </Grid.RowDefinitions>
+
                     <Grid Grid.Row="0">
-                        <TextBlock Text="Dành cho bạn" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
+                        <TextBlock 
+                            Foreground="Orange"
+                            FontSize="20"
+                            FontWeight="DemiBold"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="Dành cho bạn"></TextBlock>
                     </Grid>
-                    <Grid Grid.Row="1">
-                        <StackPanel Orientation="Vertical"
-                                            Margin="5">
-                            <TextBlock Text="Tỉnh/Thành Phố:"
-                                                   FontWeight="SemiBold"></TextBlock>
-                            <TextBox 
-                                x:Name="textTinhThanhPho"
-                                Text="{Binding NhapTinhThanhPho, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                HorizontalAlignment="Left"
-                                Width="184"
-                                materialDesign:HintAssist.Hint="Nhập tỉnh/thành phố...">
-                            </TextBox>
-                        </StackPanel>
+
+                    <Grid Grid.Row="1" Margin="5 0 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock 
+                            FontWeight="DemiBold"
+                            FontSize="16"
+                            Grid.Row="0"
+                            Text="Phong thuỷ: "></TextBlock>
+                        <Grid 
+                            Margin="10 0 0 0"
+                            Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel 
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                                <TextBlock Text="Giới tính: "></TextBlock>
+                                <ComboBox 
+                                    Margin="5 0 0 0"
+                                    Width="80">
+                                    <ComboBoxItem>
+                                        Nam
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        Nữ
+                                    </ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel 
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                                <TextBlock Text="Năm sinh: "></TextBlock>
+                                <TextBox
+                                    Width="80">
+                                </TextBox>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
-                    <Grid Grid.Row="2">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Quận/Huyện:"
-                                                   FontWeight="SemiBold"></TextBlock>
-                            <TextBox 
-                                Text="{Binding NhapQuanHuyen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                HorizontalAlignment="Left"
-                                Width="184"
-                                 materialDesign:HintAssist.Hint="Nhập quận/huyện...">
-                            </TextBox>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Row="3">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Xã/Phường:"
-                                                   FontWeight="SemiBold"></TextBlock>
-                            <TextBox 
-                                Text="{Binding NhapXaPhuong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                HorizontalAlignment="Left"
-                                Width="184"
-                                 materialDesign:HintAssist.Hint="Nhập xã/phường...">
-                            </TextBox>
+
+                    <Grid Grid.Row="2" Margin="5 0 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock 
+                            FontWeight="DemiBold"
+                            FontSize="16"
+                            Grid.Row="0"
+                            Text="Diện tích và Số phòng: "></TextBlock>
+                        <StackPanel 
+                            Margin="10 0 0 0"
+                                Grid.Row="1"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Số người trong gia đình: "></TextBlock>
+                            <ComboBox 
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Margin="5 0 0 0"
+                                Width="80">
+                                <ComboBoxItem>
+                                    1
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    2
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    3
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    4
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    5+
+                                </ComboBoxItem>
+                            </ComboBox>
                         </StackPanel>
                     </Grid>
 
-                    <Grid Grid.Row="4">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Số nhà:"
-                                                   FontWeight="SemiBold"></TextBlock>
-                            <TextBox 
-                                Text="{Binding NhapSoNha, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                HorizontalAlignment="Left"
-                                Width="184"
-                                 materialDesign:HintAssist.Hint="Nhập số nhà...">
-                            </TextBox>
+                    <Grid Grid.Row="3" Margin="5 0 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock 
+                            FontWeight="DemiBold"
+                            FontSize="16"
+                            Grid.Row="0"
+                            Text="Giá nhà: "></TextBlock>
+                        <StackPanel 
+                            Margin="10 0 0 0"
+                                Grid.Row="1"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Mức lương hiện tại: "></TextBlock>
+                            <TextBox
+                                Width="120"></TextBox>
+                            <TextBlock 
+                                Margin="5 0 0 0"
+                                Text="/tháng: "></TextBlock>
                         </StackPanel>
                     </Grid>
+                    
+                    <Grid Grid.Row="4" Margin="5 0 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock 
+                            FontWeight="DemiBold"
+                            FontSize="16"
+                            Grid.Row="0"
+                            Text="Vị trí: "></TextBlock>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <StackPanel>
+                                    <TextBlock Text="Số nhà: "></TextBlock>
+                                    <TextBox
+                                        Width="120"></TextBox>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <StackPanel>
+                                    <TextBlock Text="Xã/Phường: "></TextBlock>
+                                    <TextBox
+                                        Width="120"></TextBox>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Grid.Column="2">
+                                <StackPanel>
+                                    <TextBlock Text="Huyện/Quận: "></TextBlock>
+                                    <TextBox
+                                        Width="120"></TextBox>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Grid.Column="3">
+                                <StackPanel>
+                                    <TextBlock Text="Tỉnh/Thành phố: "></TextBlock>
+                                    <TextBox
+                                        Width="120"></TextBox>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
                     <Grid Grid.Row="5">
-                        <StackPanel Orientation="Horizontal"
-                                                HorizontalAlignment="Center">
-                            <Button Content="Tìm kiếm"
-                                    Background="#1e98d7"
-                                    BorderBrush="#1e98d7"
-                                    Foreground="White"
-                                        Command="{Binding MoDanhChoBanUCCommand}"
-                                        CommandParameter="{Binding ElementName=gridMainContent}"
-                                        Height="30"
-                                        Padding="0"
-                                        Margin="20 0 0 0"
-                                        Width="100"></Button>
-                        </StackPanel>
+                        <Button
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="Green"
+                            Content="Tìm kiếm"
+                            BorderBrush="Transparent"
+                            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                            Width="120">
+                        </Button>
                     </Grid>
                 </Grid>
+                
             </Border>
         </Grid>
     </Grid>
