@@ -31,6 +31,12 @@ namespace RealEstateApplication.ViewModel
         private List<string> _ListArea;
         public List<string> ListArea { get => _ListArea; set { _ListArea = value; OnPropertyChanged(); } }
 
+        private List<string> _ListDistrict;
+        public List<string> ListDistrict { get => _ListDistrict; set { _ListDistrict = value; OnPropertyChanged(); } }
+
+        private List<string> _ListWard;
+        public List<string> ListWard { get => _ListWard; set { _ListWard = value; OnPropertyChanged(); } }
+
         private Visibility _VisibleGridMoreFilter;
         public Visibility VisibleGridMoreFilter { get => _VisibleGridMoreFilter; set { _VisibleGridMoreFilter = value; OnPropertyChanged(); } }
 
@@ -69,6 +75,12 @@ namespace RealEstateApplication.ViewModel
         private string _DisplayArea;
         public string DisplayArea { get => _DisplayArea; set { _DisplayArea = value; OnPropertyChanged(); } }
 
+        private string _DisplayDistrict;
+        public string DisplayDistrict { get => _DisplayDistrict; set { _DisplayDistrict = value; OnPropertyChanged(); } }
+
+        private string _DisplayWard;
+        public string DisplayWard { get => _DisplayWard; set { _DisplayWard = value; OnPropertyChanged(); } }
+
         // command để copy cho dễ 
         public ICommand LoadedUserControlsCommand { get; set; }
         public ICommand ClickMoreFilterCommand { get; set; }
@@ -79,6 +91,7 @@ namespace RealEstateApplication.ViewModel
         public ICommand SelectionChangedPriceCommand { get; set; }
         public ICommand SelectionChangedAreaCommand { get; set; }
         public ICommand ClickSearchRECommand { get; set; }
+        public ICommand SelectionChangedDistrictCommand { get; set; }
         public HomepageViewModel()
         {
             // load user controls
@@ -108,6 +121,8 @@ namespace RealEstateApplication.ViewModel
                 Mode = "Bán";
                 ListViewRE = Filter.FilterTypeRE(Mode, DisplayTypeRE);
                 ListViewQueryRE = ListViewRE;
+
+                VisibleGridMoreFilter = Visibility.Collapsed;
             });
 
             // click mở filter thêm
@@ -154,10 +169,68 @@ namespace RealEstateApplication.ViewModel
                 ListViewQueryRE = ListViewRE;
             });
 
+
+            // sự kiện thay đổi lựu chọn loại bất động sản
+            SelectionChangedDistrictCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (string.IsNullOrEmpty(DisplayDistrict) == false)
+                {
+                    var newListWard = new List<string>();
+                    var _District = DataProvider.Ins.DB.devvn_quanhuyen.Where(x => x.name.Contains(DisplayDistrict) == true).FirstOrDefault();
+                    if (_District != null)
+                    {
+                        var _Wards = DataProvider.Ins.DB.devvn_xaphuongthitran.Where(x => x.maqh == _District.maqh).ToList();
+                        foreach (var war in _Wards)
+                        {
+                            newListWard.Add(war.nameXa.Replace(war.typeXa, ""));
+                        }
+                        ListWard = newListWard;
+                    }
+                    
+                }
+            });
+
+
             // sự kiện thay đổi lựu chọn thành phố
             SelectionChangedCityCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 FilterListViewRE();
+                if (string.IsNullOrEmpty(DisplayCity) == false)
+                {
+                    var newListDistrict = new List<string>();
+                    var check = DataProvider.Ins.DB.devvn_tinhthanhpho.ToList()[0];
+                    string chooseTP = "";
+                    if (DisplayCity == " Hà Nội")
+                    {
+                        chooseTP = "hà nội";
+                    }
+                    else if (DisplayCity == " Bà Rịa Vũng Tàu")
+                    {
+                        chooseTP = "vũng tàu";
+                    }
+                    else
+                    {
+                        chooseTP = DisplayCity.ToLower();
+                    }
+                    var currentTP = DataProvider.Ins.DB.devvn_tinhthanhpho.Where(x => x.nameTP.ToLower().Contains(chooseTP) == true).FirstOrDefault();
+                    if (currentTP != null)
+                    {
+                        var _District = DataProvider.Ins.DB.devvn_quanhuyen.Where(x => x.matp == currentTP.matp).ToList();
+                        foreach (var district in _District)
+                        {
+                            if (district.typeQH != "Quận")
+                            {
+                                newListDistrict.Add(district.name.Replace(district.typeQH, ""));
+                            }
+                            else
+                            {
+                                newListDistrict.Add(district.name);
+                            }
+                        }
+                        ListDistrict = newListDistrict;
+                    }
+                   
+                }
             });
 
             // sự kiện thay đổi lựu chọn giá
@@ -183,7 +256,9 @@ namespace RealEstateApplication.ViewModel
                     DisplayCity = DisplayCity,
                     DisplayPrice = DisplayPrice,
                     DisplayFilter = DisplayPrice,
-                    DisplayTypeRE = DisplayTypeRE
+                    DisplayTypeRE = DisplayTypeRE,
+                    DisplayDistrict = DisplayDistrict,
+                    DisplayWard = DisplayWard
                 };
                 UserControl child = null;
                 if (Mode == "Bán")

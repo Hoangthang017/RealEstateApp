@@ -10,4 +10,5 @@
     <viewmodel:DeXuatViewModel x:Key="DeXuatVM" ></viewmodel:DeXuatViewModel>
     <viewmodel:ChiTietDuAnViewModel x:Key="ChiTietDuAnVM"></viewmodel:ChiTietDuAnViewModel>
     <viewmodel:ChiTietDeXuatViewModel x:Key="ChiTietDeXuatVM"></viewmodel:ChiTietDeXuatViewModel>
+    <viewmodel:LoanViewModel x:Key="LoanVM"></viewmodel:LoanViewModel>
 </ResourceDictionary>

@@ -3,10 +3,403 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RealEstateApplication"
+        xmlns:local="clr-namespace:RealEstateApplication" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="LoanWindow" Height="450" Width="800">
+        TextElement.FontWeight="DemiBold"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        x:Name="_LoanWindow"
+        Background="AliceBlue"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{StaticResource LoanVM}"
+        Title="Vay tiền" Height="500" Width="900">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedLoanWindowCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!--card nhập thông tin-->
+        <materialDesign:Card Grid.Column="0" Margin="10">
+            <Grid Grid.Column="0" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.5*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!-- chọn ngân hàng vay -->
+                <Grid Grid.Row="0">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock 
+                        Text="Chọn ngân hàng vay: "
+                        FontSize="18"></TextBlock>
+                        <CheckBox Content="BIDV"
+                                  x:Name="CheckboxBIDV"
+                                  IsChecked="{Binding DisplayIsCheckedBIDV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  Margin="10 5 0 0" VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding CheckedBankCommand}"
+                                                           CommandParameter="{Binding ElementName=CheckboxBIDV}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                        <CheckBox Content="Vietinbank" 
+                                  x:Name="CheckboxVietinbank"
+                                  IsChecked="{Binding DisplayIsCheckedVietinbank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  Margin="10 5 0 0" VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding CheckedBankCommand}"
+                                                           CommandParameter="{Binding ElementName=CheckboxVietinbank}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                        <CheckBox Content="Vietcombank" 
+                                  x:Name="CheckboxVietcombank"
+                                  IsChecked="{Binding DisplayIsCheckedVietcombank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  Margin="10 5 0 0" VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding CheckedBankCommand}"
+                                                           CommandParameter="{Binding ElementName=CheckboxVietcombank}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                        <CheckBox Content="ACB" 
+                                   x:Name="CheckboxACB"
+                                  IsChecked="{Binding DisplayIsCheckedACB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  Margin="10 5 0 0" VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding CheckedBankCommand}"
+                                                           CommandParameter="{Binding ElementName=CheckboxACB}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                    </StackPanel>
+                </Grid>
+
+                <!-- số tiền vay-->
+                <Grid Grid.Row="1">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock 
+                        Text="Số gốc: "
+                        FontSize="18"></TextBlock>
+                            <TextBlock
+                        Foreground="Red"
+                        Margin="5 0 0 0"
+                        Text="{Binding DisplayRootPrice}"
+                        FontSize="18"></TextBlock>
+                            <TextBlock 
+                                Text=" VND"
+                                FontSize="18">
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock 
+                        Text="Số tiền vay: "
+                        FontSize="18"></TextBlock>
+                            <TextBlock
+                        Foreground="Red"
+                        Margin="5 0 0 0"
+                        Text="{Binding DisplayLoanPrice}"
+                        FontSize="18"></TextBlock>
+                            <TextBlock 
+                                Text=" VND"
+                                FontSize="18">
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!-- thời gian vay-->
+                <Grid Grid.Row="2">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock 
+                        Text="Thời gian vay: "
+                        FontSize="18"></TextBlock>
+                        <StackPanel Orientation="Horizontal"  Margin="10 0 0 5">
+                            <TextBox Text="{Binding DisplayMonth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Width="50">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding TextChangedMonthCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
+                            <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="THÁNG"></TextBlock>
+                            <Separator Width="4"
+                                       Margin="10 0 10 0">
+
+                            </Separator>
+                            <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="Tối đa: "></TextBlock>
+                            <TextBox 
+                                IsReadOnly="True"
+                                Text="{Binding DisplayMaxMonth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Width="50"></TextBox>
+                            <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="THÁNG"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Lãi xuất-->
+                <Grid Grid.Row="3">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock 
+                        Text="Lãi xuất: "
+                        FontSize="18"></TextBlock>
+                        <StackPanel Orientation="Horizontal"  Margin="10 0 0 5">
+                            <TextBox 
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Text="{Binding DisplayRate}"
+                                Foreground="Red"    
+                                IsReadOnly="True"
+                                Width="200"></TextBox>
+                            <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="%/Năm"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!-- tiền gốc phải trả hàng tháng-->
+                <Grid Grid.Row="4">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock 
+                        Foreground="Blue"
+                        Text="Số tiền phả trả tháng đầu: "
+                        FontSize="18"></TextBlock>
+                        <StackPanel Orientation="Horizontal"  Margin="10 0 0 5">
+                            <TextBox Text="{Binding DisplayPayFirstMonth}"
+                                     HorizontalContentAlignment="Center"
+                                 IsReadOnly="True"
+                                 Width="200"></TextBox>
+                            <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="VND"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Tiền lãi phải trả tháng đầu tiên-->
+                <Grid Grid.Row="5">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock 
+                        Foreground="Blue"
+                        Text="Tổng lãi phải trả: "
+                        FontSize="18"></TextBlock>
+                        <StackPanel Orientation="Horizontal"  Margin="10 0 0 5">
+                            <TextBox Text="{Binding DisplaySumPayRate}"
+                                     HorizontalContentAlignment="Center"
+                                 IsReadOnly="True"
+                                 Width="200"></TextBox>
+                            <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="VND"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+
+                <!-- Số tiền phải trả tháng đầu tiên-->
+                <Grid Grid.Row="6">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock 
+                        Foreground="Blue"
+                        Text="Tổng số tiền gốc và lãi phải trả: "
+                        FontSize="18"></TextBlock>
+                        <StackPanel Orientation="Horizontal"  Margin="10 0 0 5">
+                            <TextBox Text="{Binding DisplayPayAll}"
+                                 IsReadOnly="True"
+                                     HorizontalContentAlignment="Center"
+                                 Width="200"></TextBox>
+                            <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="VND"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!--Lưu ý-->
+                <Grid Grid.Row="7">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock 
+                        VerticalAlignment="Center"
+                        Text="("></TextBlock>
+                        <TextBlock 
+                        Foreground="Red"
+                        VerticalAlignment="Center"
+                        Text="*"></TextBlock>
+                        <TextBlock 
+                        VerticalAlignment="Center"
+                        Text=")"></TextBlock>
+                        <TextBlock 
+                        VerticalAlignment="Center"
+                        Text=" Bảng tính chỉ mang tính chất tham khảo.">
+
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+
+        <!--card thống kê theo tháng-->
+        <materialDesign:Card Grid.Column="1" Margin="10">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="Số tiền thanh toán hàng tháng"
+                    ></TextBlock>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        <Button 
+                        Command="{Binding ClickCalcRateCommand}"
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        Width="120"
+                        Height="30"
+                        Padding="0"
+                        Margin="2"
+                        Content="Kết quả"
+                        HorizontalAlignment="Right"
+                        Background="Green"
+                        BorderBrush="Green"
+                        Foreground="White"></Button>
+
+                        <Button 
+                        Command="{Binding ClickOpenLinkCommand}"
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        Width="120"
+                        Height="30"
+                        Padding="0"
+                        Margin="2"
+                        Content="Thông tin chi tiết"
+                        HorizontalAlignment="Right"
+                        Background="Orange"
+                        BorderBrush="Orange"
+                        Foreground="White"></Button>
+                    </StackPanel>
+
+                </Grid>
+
+
+                <DataGrid 
+                    Background="Transparent"
+                    Grid.Row="1"
+                    ItemsSource="{Binding ListPayPerMonth}"
+                    ColumnWidth="*"
+                    CanUserSortColumns="True"
+                    CanUserAddRows="False"
+                    AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <!--số thứ tự-->
+                        <DataGridTextColumn
+                                        Binding="{Binding STT}"
+                                        Header="Kỳ hạn"
+                                        Width="auto"
+                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <!--Tiền vay còn lại-->
+                        <DataGridTextColumn
+                                        Binding="{Binding RatePrice}"
+                                        Header="Lãi phải trả"
+                                        Width="auto"
+                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <!--Tên phiếu-->
+                        <DataGridTextColumn
+                                        Binding="{Binding RootPrice}"
+                                        Header="Gốc phải trả"
+                                        Width="auto"
+                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <!--Ngày ghi nhận -->
+                        <DataGridTextColumn
+                                        Binding="{Binding PayPrice}"
+                                        Header="Số tiền phải trả"
+                                        Width="auto"
+                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <!--Ngày ghi nhận -->
+                        <DataGridTextColumn
+                                        Binding="{Binding SumPrice}"
+                                        Header="Số tiền còn lại"
+                                        Width="auto"
+                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </Window>

@@ -25,7 +25,7 @@
             <RowDefinition Height="80"></RowDefinition>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
+
         <!--Thanh tìm kiếm-->
         <Grid Grid.Row="0">
             <Grid
@@ -36,7 +36,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <!--Thanh tìm kiếm-->
                 <Grid Grid.Row="0">
                     <Grid Margin="5"
@@ -46,7 +46,7 @@
                             <ColumnDefinition Width="4*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--Loại bất động sản-->
                         <Grid Grid.Column="0">
                             <ComboBox   materialDesign:HintAssist.Hint="Loại bất động sản"
@@ -64,7 +64,7 @@
                                 </i:Interaction.Triggers>
                             </ComboBox>
                         </Grid>
-                        
+
                         <!--Ô tìm kiếm-->
                         <Grid Grid.Column="1"
                                   Margin="5 0 0 0">
@@ -74,7 +74,7 @@
                                      materialDesign:HintAssist.Hint="Nhập tên dự án...">
                             </TextBox>
                         </Grid>
-                        
+
                         <!--Nút tìm kiếm-->
                         <Grid Grid.Column="2">
                             <Button Command="{Binding ClickSearchRECommand}"
@@ -92,7 +92,7 @@
                     </Grid>
 
                 </Grid>
-                
+
                 <!--thanh filter-->
                 <Grid Grid.Row="1" >
                     <Grid Margin="5 0 5 5">
@@ -102,7 +102,7 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--Khu vực-->
                         <Grid Grid.Column="0">
                             <ComboBox   materialDesign:HintAssist.Hint="Tỉnh Thành"
@@ -131,7 +131,7 @@
                                 </i:Interaction.Triggers>
                             </ComboBox>
                         </Grid>
-                        
+
                         <!--Tất cả-->
                         <Grid Grid.Column="1">
                             <ComboBox   materialDesign:HintAssist.Hint="Giá"
@@ -188,7 +188,8 @@
                             </ComboBox>
                         </Grid>
 
-                        <!--Dự Án--><!--
+                        <!--Dự Án-->
+                        <!--
                         <Grid Grid.Column="3">
                             <ComboBox   materialDesign:HintAssist.Hint="Dự Án"
                                             HorizontalContentAlignment="Center"
@@ -240,13 +241,13 @@
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
-                            
+
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
         </Grid>
-        
+
         <!--Grid ô sắp xếp theo và kết quả trả về-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -270,7 +271,7 @@
                                Text="Có "
                                VerticalAlignment="Center"
                                Margin="30 0 0 0">
-                         
+
                         </TextBlock>
                         <TextBlock HorizontalAlignment="Left"
                                Width="auto"
@@ -286,7 +287,7 @@
 
                         </TextBlock>
                     </StackPanel>
-                    
+
                     <!--Sắp xếp theo-->
                     <ComboBox materialDesign:HintAssist.Hint="Sắp xếp theo"
                               IsEditable="False"
@@ -304,6 +305,69 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ComboBox>
+                </Grid>
+
+                <!--Lọc thêm-->
+                <Grid Grid.Column="0" Background="Black" Visibility="{Binding VisibleGridMoreFilter}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="45"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Khu vực-->
+                    <Grid Grid.Column="0">
+                        <ComboBox   materialDesign:HintAssist.Hint="Quận / Huyện"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Background="Black"
+                                            Foreground="White"
+                                            BorderBrush="White"
+                                            BorderThickness="1"
+                                            Margin="4"
+                                            IsEditable="True"
+                                            IsTextSearchEnabled="True"
+                                            materialDesign:HintAssist.HintOpacity="1"
+                                            ItemsSource="{Binding ListDistrict}"
+                                            SelectedValue="{Binding DisplayDistrict,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ComboBoxItem}">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectionChangedDistrictCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                    </Grid>
+
+                    <!--Loại-->
+                    <Grid Grid.Column="1">
+                        <ComboBox   materialDesign:HintAssist.Hint="Phường / Xã"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Background="Transparent"
+                                            Foreground="White"
+                                            BorderBrush="White"
+                                            BorderThickness="1"
+                                            Margin="4"
+                                            IsEditable="True"
+                                            ItemsSource="{Binding ListWard}"
+                                            SelectedValue="{Binding DisplayWard,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                            materialDesign:HintAssist.HintOpacity="1">
+                            <ComboBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ComboBoxItem}">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                        </ComboBox>
+                    </Grid>
+
+                    <!--Diện tích-->
+                    <Grid Grid.Column="2"/>
                 </Grid>
 
                 <!--Các kết quả tìm được-->
@@ -387,7 +451,7 @@
                                                FontSize="18"
                                                TextWrapping="Wrap"></TextBlock>
                                                             </StackPanel>
-                                                            
+
                                                         </Grid>
 
                                                         <!--Thời gian-->
@@ -463,11 +527,11 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
-                        
+
                     </DataGrid>
                 </Grid>
             </Grid>
-            
+
             <!--Grid tìm kiếm theo chỉ định-->
             <Grid Grid.Column="1">
                 <Image 

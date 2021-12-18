@@ -25,6 +25,9 @@ namespace RealEstateApplication.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<devvn_quanhuyen> devvn_quanhuyen { get; set; }
+        public virtual DbSet<devvn_tinhthanhpho> devvn_tinhthanhpho { get; set; }
+        public virtual DbSet<devvn_xaphuongthitran> devvn_xaphuongthitran { get; set; }
         public virtual DbSet<ProjectInfo> ProjectInfoes { get; set; }
         public virtual DbSet<RealEstateInfo> RealEstateInfoes { get; set; }
     }

@@ -329,12 +329,18 @@
                                             IsEditable="True"
                                             IsTextSearchEnabled="True"
                                             materialDesign:HintAssist.HintOpacity="1"
-                                            ItemsSource="{Binding ListLocation}">
+                                            ItemsSource="{Binding ListDistrict}"
+                                            SelectedValue="{Binding DisplayDistrict,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemContainerStyle>
                                     <Style TargetType="{x:Type ComboBoxItem}">
                                         <Setter Property="Foreground" Value="Black"/>
                                     </Style>
                                 </ComboBox.ItemContainerStyle>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectionChangedDistrictCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ComboBox>
                         </Grid>
 
@@ -349,7 +355,8 @@
                                             BorderThickness="1"
                                             Margin="4"
                                             IsEditable="True"
-                                            ItemsSource="{Binding ListPrice}"
+                                            ItemsSource="{Binding ListWard}"
+                                            SelectedValue="{Binding DisplayWard,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                             materialDesign:HintAssist.HintOpacity="1">
                                 <ComboBox.ItemContainerStyle>
                                     <Style TargetType="{x:Type ComboBoxItem}">
@@ -360,25 +367,7 @@
                         </Grid>
 
                         <!--Diện tích-->
-                        <Grid Grid.Column="2">
-                            <ComboBox   materialDesign:HintAssist.Hint="Đường / Phố"
-                                            HorizontalContentAlignment="Center"
-                                            VerticalContentAlignment="Center"
-                                            Background="Transparent"
-                                            Foreground="White"
-                                            BorderBrush="White"
-                                            BorderThickness="1"
-                                            Margin="4"
-                                            ItemsSource="{Binding ListArea}"
-                                            IsEditable="True"
-                                             materialDesign:HintAssist.HintOpacity="1">
-                                <ComboBox.ItemContainerStyle>
-                                    <Style TargetType="{x:Type ComboBoxItem}">
-                                        <Setter Property="Foreground" Value="Black"/>
-                                    </Style>
-                                </ComboBox.ItemContainerStyle>
-                            </ComboBox>
-                        </Grid>
+                        <Grid Grid.Column="2"/>
                     </Grid>
                 </Grid>
             </Grid>
