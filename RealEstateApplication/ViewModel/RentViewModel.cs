@@ -116,7 +116,7 @@ namespace RealEstateApplication.ViewModel
 
                 if (ListViewRE == null || ListViewRE.Count == 0)
                 {
-                    ListViewRE = new ObservableCollection<RealEstateInfo>(DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.typeRealEstate.Contains("Cho thuê ") == true).ToList());
+                    ListViewRE = new ObservableCollection<RealEstateInfo>(DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.type.Contains("Cho thuê ") == true).ToList());
                     DisplayTypeRE = null;
                     DisplayPrice = null;
                     DisplayArea = null;
@@ -157,7 +157,7 @@ namespace RealEstateApplication.ViewModel
                 DisplayCity = null;
                 DisplayArea = null;
                 DisplayPrice = null;
-                ListViewRE = new ObservableCollection<RealEstateInfo>(DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.typeRealEstate.Contains("Cho thuê") == true).ToList());
+                ListViewRE = new ObservableCollection<RealEstateInfo>(DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.type.Contains("Cho thuê") == true).ToList());
                 ListViewQueryRE = ListViewRE;
             });
 

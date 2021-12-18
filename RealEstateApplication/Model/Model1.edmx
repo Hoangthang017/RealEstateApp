@@ -9,23 +9,40 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="link" Type="varchar" MaxLength="150" />
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="scale" Type="nvarchar" MaxLength="100" />
+          <Property Name="area" Type="nvarchar" MaxLength="100" />
+          <Property Name="legal" Type="nvarchar" MaxLength="100" />
+          <Property Name="planning" Type="nvarchar" MaxLength="150" />
+          <Property Name="handoverTime" Type="nvarchar" MaxLength="100" />
+          <Property Name="salePrice" Type="nvarchar" MaxLength="50" />
+          <Property Name="introduce" Type="nvarchar(max)" />
+          <Property Name="overview" Type="nvarchar(max)" />
+          <Property Name="overviewImage" Type="varchar" MaxLength="100" />
+          <Property Name="location" Type="nvarchar(max)" />
+          <Property Name="locationImage" Type="varchar" MaxLength="100" />
+          <Property Name="masterPlan" Type="nvarchar(max)" />
+          <Property Name="masterPlanImage" Type="varchar" MaxLength="100" />
+          <Property Name="utilities" Type="nvarchar(max)" />
+          <Property Name="utilitiesImage" Type="varchar" MaxLength="100" />
+          <Property Name="investor" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="RealEstateInfo">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="typeRealEstate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="img" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="descriptRealEstate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="price" Type="nvarchar" MaxLength="50" />
-          <Property Name="locationRealEstate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="location" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="area" Type="int" />
           <Property Name="timepost" Type="datetime" Nullable="false" />
-          <Property Name="addressRealEstate" Type="nvarchar" MaxLength="500" />
+          <Property Name="address" Type="nvarchar" MaxLength="500" />
           <Property Name="streetWidth" Type="int" />
           <Property Name="orientation" Type="nvarchar" MaxLength="20" />
           <Property Name="width" Type="int" />
@@ -35,7 +52,7 @@
           <Property Name="toilets" Type="int" />
           <Property Name="furniture" Type="nvarchar" MaxLength="300" />
           <Property Name="legalDocument" Type="nvarchar" MaxLength="150" />
-          <Property Name="projectId" Type="int" />
+          <Property Name="projectId" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="RealEstateManagementModelStoreContainer">
           <EntitySet Name="ProjectInfo" EntityType="Self.ProjectInfo" Schema="dbo" store:Type="Tables" />
@@ -50,23 +67,40 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="link" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="scale" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="legal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="planning" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="handoverTime" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="salePrice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="overview" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="overviewImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="locationImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="masterPlan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="masterPlanImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="utilities" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="utilitiesImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="investor" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RealEstateInfo">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="typeRealEstate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="img" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="descriptRealEstate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="locationRealEstate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="area" Type="Int32" />
           <Property Name="timepost" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="addressRealEstate" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="streetWidth" Type="Int32" />
           <Property Name="orientation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="width" Type="Int32" />
@@ -76,7 +110,7 @@
           <Property Name="toilets" Type="Int32" />
           <Property Name="furniture" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="legalDocument" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="projectId" Type="Int32" />
+          <Property Name="projectId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="RealEstateManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ProjectInfoes" EntityType="Self.ProjectInfo" />
@@ -92,7 +126,24 @@
             <EntityTypeMapping TypeName="RealEstateManagementModel.ProjectInfo">
               <MappingFragment StoreEntitySet="ProjectInfo">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="scale" ColumnName="scale" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="legal" ColumnName="legal" />
+                <ScalarProperty Name="planning" ColumnName="planning" />
+                <ScalarProperty Name="handoverTime" ColumnName="handoverTime" />
+                <ScalarProperty Name="salePrice" ColumnName="salePrice" />
+                <ScalarProperty Name="introduce" ColumnName="introduce" />
+                <ScalarProperty Name="overview" ColumnName="overview" />
+                <ScalarProperty Name="overviewImage" ColumnName="overviewImage" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="locationImage" ColumnName="locationImage" />
+                <ScalarProperty Name="masterPlan" ColumnName="masterPlan" />
+                <ScalarProperty Name="masterPlanImage" ColumnName="masterPlanImage" />
+                <ScalarProperty Name="utilities" ColumnName="utilities" />
+                <ScalarProperty Name="utilitiesImage" ColumnName="utilitiesImage" />
+                <ScalarProperty Name="investor" ColumnName="investor" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -101,14 +152,14 @@
               <MappingFragment StoreEntitySet="RealEstateInfo">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="typeRealEstate" ColumnName="typeRealEstate" />
+                <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="img" ColumnName="img" />
-                <ScalarProperty Name="descriptRealEstate" ColumnName="descriptRealEstate" />
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="locationRealEstate" ColumnName="locationRealEstate" />
+                <ScalarProperty Name="location" ColumnName="location" />
                 <ScalarProperty Name="area" ColumnName="area" />
                 <ScalarProperty Name="timepost" ColumnName="timepost" />
-                <ScalarProperty Name="addressRealEstate" ColumnName="addressRealEstate" />
+                <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="streetWidth" ColumnName="streetWidth" />
                 <ScalarProperty Name="orientation" ColumnName="orientation" />
                 <ScalarProperty Name="width" ColumnName="width" />

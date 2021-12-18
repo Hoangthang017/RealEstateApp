@@ -67,6 +67,9 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -116,14 +119,26 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\OpenUC.cs" />
+    <Compile Include="Model\passData.cs" />
+    <Compile Include="Model\passDataDetailPJ.cs" />
+    <Compile Include="Model\passDataDetailRE.cs" />
     <Compile Include="Model\ProjectInfo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\RealEstateInfo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ChiTietDeXuat.xaml.cs">
+      <DependentUpon>ChiTietDeXuat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ChiTietDuAn.xaml.cs">
+      <DependentUpon>ChiTietDuAn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\DetailUC.xaml.cs">
       <DependentUpon>DetailUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DeXuatUC.xaml.cs">
+      <DependentUpon>DeXuatUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Homepage.xaml.cs">
       <DependentUpon>Homepage.xaml</DependentUpon>
@@ -138,7 +153,10 @@
       <DependentUpon>RentUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ChiTietDeXuatViewModel.cs" />
+    <Compile Include="ViewModel\ChiTietDuAnViewModel.cs" />
     <Compile Include="ViewModel\DetailViewModel.cs" />
+    <Compile Include="ViewModel\DeXuatViewModel.cs" />
     <Compile Include="ViewModel\HomepageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ProjectViewModel.cs" />
@@ -164,7 +182,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\ChiTietDeXuat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ChiTietDuAn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\DetailUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DeXuatUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -262,6 +292,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Pictures\banner-dọc-Safira.jpg" />
+    <Resource Include="Pictures\banner-2-1.jpg" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -272,8 +304,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Pictures\banner-dọc-Safira.jpg" />
-    <Resource Include="Pictures\banner-2-1.jpg" />
     <Content Include="RealEstateManagement.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

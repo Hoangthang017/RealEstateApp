@@ -23,10 +23,10 @@ namespace RealEstateApplication.Model
             ListAddressRE = new List<string>();
             foreach (var infor in infors)
             {
-                var typeRE = infor.typeRealEstate;
+                var typeRE = infor.type;
                 if (typeRE.Split(' ')[0].ToLower() == "bán")
                 {
-                    typeRE = infor.typeRealEstate.Replace("Bán ", "");
+                    typeRE = infor.type.Replace("Bán ", "");
                     if (ListTypeSellRE.Contains(typeRE) == false)
                     {
                         ListTypeSellRE.Add(typeRE);
@@ -34,14 +34,14 @@ namespace RealEstateApplication.Model
                 }
                 else
                 {
-                    typeRE = infor.typeRealEstate.Replace("Cho thuê ", "");
+                    typeRE = infor.type.Replace("Cho thuê ", "");
                     if (ListTypeRentRE.Contains(typeRE) == false)
                     {
                         ListTypeRentRE.Add(typeRE);
                     }
                 }
 
-                var location = infor.locationRealEstate.Split(',')[1];
+                var location = infor.location.Split(',')[1];
                 if (ListAddressRE.Contains(location) == false)
                 {
                     ListAddressRE.Add(location);
@@ -60,9 +60,9 @@ namespace RealEstateApplication.Model
 
                 infor.price = infor.price.Replace(',', '.');
 
-                infor.descriptRealEstate = infor.descriptRealEstate.Trim();
+                infor.description = infor.description.Trim();
 
-                infor.addressRealEstate = infor.addressRealEstate.Replace(infor.typeRealEstate, "").Replace("Dự án", "");
+                infor.address = infor.address.Replace(infor.type, "").Replace("Dự án", "");
             }
 
             ListPriceRE = new List<string>()
@@ -109,17 +109,17 @@ namespace RealEstateApplication.Model
         {
             if (typeRE == "Bán")
             {
-                return DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.typeRealEstate.Replace("Bán ", "") == nameRE).ToList();
+                return DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.type.Replace("Bán ", "") == nameRE).ToList();
             }
-            return DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.typeRealEstate.ToLower().Contains("thuê") == true &&
-                                                                    x.typeRealEstate.ToLower().Contains(nameRE.ToLower()) == true
+            return DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.type.ToLower().Contains("thuê") == true &&
+                                                                    x.type.ToLower().Contains(nameRE.ToLower()) == true
             ).ToList();
         }
 
         // filter theo thành phố
         public static List<RealEstateInfo> FilterCity(string city, List<RealEstateInfo> ListViewRE)
         {
-            return ListViewRE.Where(x => x.locationRealEstate.Split(',')[1] == city).ToList();
+            return ListViewRE.Where(x => x.location.Split(',')[1] == city).ToList();
         }
 
         // filter theo giá

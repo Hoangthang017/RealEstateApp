@@ -7,4 +7,7 @@
     <viewmodel:RentViewModel x:Key="RentVM" ></viewmodel:RentViewModel>
     <viewmodel:ProjectViewModel x:Key="ProjectVM"></viewmodel:ProjectViewModel>
     <viewmodel:DetailViewModel x:Key="DetailVM"></viewmodel:DetailViewModel>
+    <viewmodel:DeXuatViewModel x:Key="DeXuatVM" ></viewmodel:DeXuatViewModel>
+    <viewmodel:ChiTietDuAnViewModel x:Key="ChiTietDuAnVM"></viewmodel:ChiTietDuAnViewModel>
+    <viewmodel:ChiTietDeXuatViewModel x:Key="ChiTietDeXuatVM"></viewmodel:ChiTietDeXuatViewModel>
 </ResourceDictionary>

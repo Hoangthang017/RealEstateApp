@@ -14,7 +14,24 @@ namespace RealEstateApplication.Model
     
     public partial class ProjectInfo
     {
-        public int id { get; set; }
-        public string link { get; set; }
+        public string id { get; set; }
+        public string name { get; set; }
+        public string address { get; set; }
+        public string scale { get; set; }
+        public string area { get; set; }
+        public string legal { get; set; }
+        public string planning { get; set; }
+        public string handoverTime { get; set; }
+        public string salePrice { get; set; }
+        public string introduce { get; set; }
+        public string overview { get; set; }
+        public string overviewImage { get; set; }
+        public string location { get; set; }
+        public string locationImage { get; set; }
+        public string masterPlan { get; set; }
+        public string masterPlanImage { get; set; }
+        public string utilities { get; set; }
+        public string utilitiesImage { get; set; }
+        public string investor { get; set; }
     }
 }

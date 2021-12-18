@@ -4,23 +4,40 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="link" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="scale" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="area" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="legal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="planning" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="handoverTime" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="salePrice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="overview" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="overviewImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="locationImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="masterPlan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="masterPlanImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="utilities" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="utilitiesImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="investor" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="RealEstateInfo">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="typeRealEstate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="img" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="descriptRealEstate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="locationRealEstate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="area" Type="Int32" />
     <Property Name="timepost" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="addressRealEstate" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="streetWidth" Type="Int32" />
     <Property Name="orientation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="width" Type="Int32" />
@@ -30,7 +47,7 @@
     <Property Name="toilets" Type="Int32" />
     <Property Name="furniture" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <Property Name="legalDocument" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="projectId" Type="Int32" />
+    <Property Name="projectId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityContainer Name="RealEstateManagementEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ProjectInfoes" EntityType="Self.ProjectInfo" />
