@@ -3,6 +3,7 @@ using RealEstateApplication.UserControls;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace RealEstateApplication.ViewModel
@@ -33,6 +34,16 @@ namespace RealEstateApplication.ViewModel
         private List<string> _ListFilter;
         public List<string> ListFilter { get => _ListFilter; set { _ListFilter = value; OnPropertyChanged(); } }
 
+        // lọc thêm
+        private List<string> _ListDistrict;
+        public List<string> ListDistrict { get => _ListDistrict; set { _ListDistrict = value; OnPropertyChanged(); } }
+
+        private List<string> _ListWard;
+        public List<string> ListWard { get => _ListWard; set { _ListWard = value; OnPropertyChanged(); } }
+
+        private Visibility _VisibleGridMoreFilter;
+        public Visibility VisibleGridMoreFilter { get => _VisibleGridMoreFilter; set { _VisibleGridMoreFilter = value; OnPropertyChanged(); } }
+
         // display
         private string _Query;
         public string Query { get => _Query; set { _Query = value; OnPropertyChanged(); } }
@@ -55,6 +66,12 @@ namespace RealEstateApplication.ViewModel
         private string _DisplayFilter;
         public string DisplayFilter { get => _DisplayFilter; set { _DisplayFilter = value; OnPropertyChanged(); } }
 
+        private string _DisplayDistrict;
+        public string DisplayDistrict { get => _DisplayDistrict; set { _DisplayDistrict = value; OnPropertyChanged(); } }
+
+        private string _DisplayWard;
+        public string DisplayWard { get => _DisplayWard; set { _DisplayWard = value; OnPropertyChanged(); } }
+
         private RealEstateInfo _DisplayRE;
         public RealEstateInfo DisplayRE { get => _DisplayRE; set { _DisplayRE = value; OnPropertyChanged(); } }
 
@@ -70,14 +87,30 @@ namespace RealEstateApplication.ViewModel
         public ICommand SelectionChangedFilterCommand { get; set; }
         public ICommand SelectedCellsChangedRECommand { get; set; }
         public ICommand DeleteFilterCommand { get; set; }
+        public ICommand ClickMoreFilterCommand { get; set; }
         #endregion
 
         public PurchaseViewModel()
         {
             #region cài đặt command
+            // click mở filter thêm
+            ClickMoreFilterCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (VisibleGridMoreFilter == Visibility.Collapsed)
+                {
+                    VisibleGridMoreFilter = Visibility.Visible;
+                }
+                else
+                {
+                    VisibleGridMoreFilter = Visibility.Collapsed;
+                }
+            });
+
             // load user control
             LoadedUserControlsCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                VisibleGridMoreFilter = Visibility.Collapsed;
+
                 // create 
                 Reset();
 
@@ -111,6 +144,8 @@ namespace RealEstateApplication.ViewModel
                     DisplayPrice = BackupListRE.Container.DisplayPrice;
                     DisplayFilter = BackupListRE.Container.DisplayFilter;
                     DisplayTypeRE = BackupListRE.Container.DisplayTypeRE;
+                    DisplayWard = BackupListRE.Container.DisplayWard;
+                    DisplayDistrict = BackupListRE.Container.DisplayDistrict;
                     BackupListRE.Clear();
                 }
 
@@ -236,10 +271,17 @@ namespace RealEstateApplication.ViewModel
                 ListViewQueryRE = new ObservableCollection<RealEstateInfo>(Filter.FilterArea(ListArea.IndexOf(DisplayArea), ListViewQueryRE.ToList()));
             }
 
+            if (string.IsNullOrEmpty(DisplayDistrict) == false)
+            {
+                ListViewQueryRE = new ObservableCollection<RealEstateInfo>(ListViewQueryRE.Where(x => x.title.ToLower().Contains(Query) == true).ToList());
+            }
+
             if (string.IsNullOrEmpty(Query) == false)
             {
                 ListViewQueryRE = new ObservableCollection<RealEstateInfo>(ListViewQueryRE.Where(x => x.title.ToLower().Contains(Query) == true).ToList());
             }
+
+            
 
             if (string.IsNullOrEmpty(DisplayFilter) == false)
             {

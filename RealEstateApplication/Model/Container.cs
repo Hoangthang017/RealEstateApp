@@ -13,6 +13,8 @@ namespace RealEstateApplication.Model
         public string DisplayPrice { get; set; }
         public string DisplayArea { get; set; }
         public string DisplayFilter { get; set; }
+        public string DisplayDistrict { get; set; }
+        public string DisplayWard { get; set; }
         public RealEstateInfo ViewRE { get; set; }
         public string PriceLoan { get; set; }
 
@@ -29,6 +31,8 @@ namespace RealEstateApplication.Model
             DisplayTypeRE = null;
             ViewRE = null;
             PriceLoan = null;
+            DisplayDistrict = null;
+            DisplayWard = null;
         }
 
         public Container()

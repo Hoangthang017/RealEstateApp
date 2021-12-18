@@ -35,7 +35,8 @@ namespace RealEstateApplication.Model
         public string furniture { get; set; }
         public string legalDocument { get; set; }
         public string projectId { get; set; }
-        // thêm source thẳng vào database / dấu bình phương
+
+        // thêm trực tiếp vào database 
         public ImageSource imageSource { get; set; }
         public string squareRoot { get; set; }
     }

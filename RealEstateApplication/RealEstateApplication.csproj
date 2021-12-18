@@ -102,6 +102,15 @@
     <Compile Include="Model\BackupListRE.cs" />
     <Compile Include="Model\Container.cs" />
     <Compile Include="Model\DataProvider.cs" />
+    <Compile Include="Model\devvn_quanhuyen.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\devvn_tinhthanhpho.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\devvn_xaphuongthitran.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Filter.cs" />
     <Compile Include="Model\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -158,6 +167,7 @@
     <Compile Include="ViewModel\DetailViewModel.cs" />
     <Compile Include="ViewModel\DeXuatViewModel.cs" />
     <Compile Include="ViewModel\HomepageViewModel.cs" />
+    <Compile Include="ViewModel\LoanViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ProjectViewModel.cs" />
     <Compile Include="ViewModel\PurchaseViewModel.cs" />
@@ -294,6 +304,8 @@
   <ItemGroup>
     <Resource Include="Pictures\banner-dọc-Safira.jpg" />
     <Resource Include="Pictures\banner-2-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

@@ -1,5 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="RealEstateManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="devvn_quanhuyen">
+    <Key>
+      <PropertyRef Name="maqh" />
+    </Key>
+    <Property Name="maqh" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="typeQH" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="matp" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="devvn_tinhthanhpho">
+    <Key>
+      <PropertyRef Name="matp" />
+    </Key>
+    <Property Name="matp" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nameTP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="typeTP" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="slug" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="devvn_xaphuongthitran">
+    <Key>
+      <PropertyRef Name="xaid" />
+    </Key>
+    <Property Name="xaid" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nameXa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="typeXa" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="maqh" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
   <EntityType Name="ProjectInfo">
     <Key>
       <PropertyRef Name="id" />
@@ -50,6 +77,9 @@
     <Property Name="projectId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityContainer Name="RealEstateManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="devvn_quanhuyen" EntityType="Self.devvn_quanhuyen" />
+    <EntitySet Name="devvn_tinhthanhpho" EntityType="Self.devvn_tinhthanhpho" />
+    <EntitySet Name="devvn_xaphuongthitran" EntityType="Self.devvn_xaphuongthitran" />
     <EntitySet Name="ProjectInfoes" EntityType="Self.ProjectInfo" />
     <EntitySet Name="RealEstateInfoes" EntityType="Self.RealEstateInfo" />
   </EntityContainer>

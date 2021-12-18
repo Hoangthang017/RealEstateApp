@@ -5,6 +5,33 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="RealEstateManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="devvn_quanhuyen">
+          <Key>
+            <PropertyRef Name="maqh" />
+          </Key>
+          <Property Name="maqh" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="typeQH" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="matp" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="devvn_tinhthanhpho">
+          <Key>
+            <PropertyRef Name="matp" />
+          </Key>
+          <Property Name="matp" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="nameTP" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="typeTP" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="slug" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="devvn_xaphuongthitran">
+          <Key>
+            <PropertyRef Name="xaid" />
+          </Key>
+          <Property Name="xaid" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="nameXa" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="typeXa" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="maqh" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProjectInfo">
           <Key>
             <PropertyRef Name="id" />
@@ -55,6 +82,9 @@
           <Property Name="projectId" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="RealEstateManagementModelStoreContainer">
+          <EntitySet Name="devvn_quanhuyen" EntityType="Self.devvn_quanhuyen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="devvn_tinhthanhpho" EntityType="Self.devvn_tinhthanhpho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="devvn_xaphuongthitran" EntityType="Self.devvn_xaphuongthitran" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProjectInfo" EntityType="Self.ProjectInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RealEstateInfo" EntityType="Self.RealEstateInfo" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -63,6 +93,33 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RealEstateManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="devvn_quanhuyen">
+          <Key>
+            <PropertyRef Name="maqh" />
+          </Key>
+          <Property Name="maqh" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="typeQH" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="matp" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="devvn_tinhthanhpho">
+          <Key>
+            <PropertyRef Name="matp" />
+          </Key>
+          <Property Name="matp" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nameTP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="typeTP" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="slug" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="devvn_xaphuongthitran">
+          <Key>
+            <PropertyRef Name="xaid" />
+          </Key>
+          <Property Name="xaid" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nameXa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="typeXa" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="maqh" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProjectInfo">
           <Key>
             <PropertyRef Name="id" />
@@ -113,6 +170,9 @@
           <Property Name="projectId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="RealEstateManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="devvn_quanhuyen" EntityType="Self.devvn_quanhuyen" />
+          <EntitySet Name="devvn_tinhthanhpho" EntityType="Self.devvn_tinhthanhpho" />
+          <EntitySet Name="devvn_xaphuongthitran" EntityType="Self.devvn_xaphuongthitran" />
           <EntitySet Name="ProjectInfoes" EntityType="Self.ProjectInfo" />
           <EntitySet Name="RealEstateInfoes" EntityType="Self.RealEstateInfo" />
         </EntityContainer>
@@ -122,6 +182,36 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="RealEstateManagementModelStoreContainer" CdmEntityContainer="RealEstateManagementEntities">
+          <EntitySetMapping Name="devvn_quanhuyen">
+            <EntityTypeMapping TypeName="RealEstateManagementModel.devvn_quanhuyen">
+              <MappingFragment StoreEntitySet="devvn_quanhuyen">
+                <ScalarProperty Name="maqh" ColumnName="maqh" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="typeQH" ColumnName="typeQH" />
+                <ScalarProperty Name="matp" ColumnName="matp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="devvn_tinhthanhpho">
+            <EntityTypeMapping TypeName="RealEstateManagementModel.devvn_tinhthanhpho">
+              <MappingFragment StoreEntitySet="devvn_tinhthanhpho">
+                <ScalarProperty Name="matp" ColumnName="matp" />
+                <ScalarProperty Name="nameTP" ColumnName="nameTP" />
+                <ScalarProperty Name="typeTP" ColumnName="typeTP" />
+                <ScalarProperty Name="slug" ColumnName="slug" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="devvn_xaphuongthitran">
+            <EntityTypeMapping TypeName="RealEstateManagementModel.devvn_xaphuongthitran">
+              <MappingFragment StoreEntitySet="devvn_xaphuongthitran">
+                <ScalarProperty Name="xaid" ColumnName="xaid" />
+                <ScalarProperty Name="nameXa" ColumnName="nameXa" />
+                <ScalarProperty Name="typeXa" ColumnName="typeXa" />
+                <ScalarProperty Name="maqh" ColumnName="maqh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProjectInfoes">
             <EntityTypeMapping TypeName="RealEstateManagementModel.ProjectInfo">
               <MappingFragment StoreEntitySet="ProjectInfo">
