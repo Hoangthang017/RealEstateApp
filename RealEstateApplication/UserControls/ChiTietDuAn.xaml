@@ -1,0 +1,347 @@
+﻿<UserControl x:Class="RealEstateApplication.UserControls.ChiTietDuAn"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RealEstateApplication.UserControls" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{StaticResource ChiTietDuAnVM}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedUserControlsCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+
+                <Button 
+                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                    Command="{Binding ClickComebackCommand}"    
+                    Background="Transparent"
+                    Foreground="Orange"
+                    BorderBrush="Transparent">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon 
+                    Height="20"
+                    Width="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="Orange"
+                    Kind="ArrowLeft"  />
+                        <TextBlock Text="Quay lại"></TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ScrollViewer>
+                <materialDesign:Card Margin="10 10 10 10">
+                    <StackPanel Margin="10" >
+                        <TextBlock Text="{Binding cellProjectInfo.name}" FontWeight="Bold" Foreground="Brown"></TextBlock>
+                        <TextBlock Text="{Binding cellProjectInfo.introduce}"
+                               FontWeight="DemiBold"
+                               TextWrapping="Wrap"></TextBlock>
+
+                        <TextBlock Text="TỔNG QUAN DỰ ÁN" FontWeight="Bold" Foreground="Brown"
+                               Margin="0 10"></TextBlock>
+                        <Rectangle Width="800"
+                               Height="400" 
+                                   Visibility="{Binding isAnhTongQuan}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding AnhTongQuan}"></ImageBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Border BorderThickness="2" 
+                            BorderBrush="#f9a925" 
+                            CornerRadius="5" 
+                            Height="300"
+                            Margin="20 5"
+                            Width="700"
+                                Visibility="Visible">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Row="0" Grid.Column="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="1">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition ></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <TextBlock Text="QUY MÔ DỰ ÁN"
+                                                           FontWeight="DemiBold"
+                                                           VerticalAlignment="Bottom"/>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <TextBlock Text="{Binding cellProjectInfo.scale}"
+                                                           FontSize="20"
+                                                           FontWeight="Bold"
+                                                           Foreground="Red"/>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon Kind="ChartArc" 
+                                                                 Width="60"
+                                                                 Height="60"
+                                                                 HorizontalAlignment="Right"
+                                                                 VerticalAlignment="Center" 
+                                                                 Margin="10"
+                                                                 Foreground="#f9a925" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.Column="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="1">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <TextBlock Text="DIỆN TÍCH"
+                                                           FontWeight="DemiBold"
+                                                           VerticalAlignment="Bottom"/>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <TextBlock Text="{Binding cellProjectInfo.area}"
+                                                           FontSize="20"
+                                                           FontWeight="Bold"
+                                                           Foreground="Red"
+                                                               TextWrapping="Wrap"/>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon Kind="TextureBox" 
+                                                                 Width="60"
+                                                                 Height="60"
+                                                                 HorizontalAlignment="Right"
+                                                                 VerticalAlignment="Center" 
+                                                                 Margin="10"
+                                                                 Foreground="#f9a925" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="2" Grid.Column="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="1">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <TextBlock Text="PHÁP LÝ"
+                                                           FontWeight="DemiBold"
+                                                           VerticalAlignment="Bottom"/>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <TextBlock Text="{Binding cellProjectInfo.legal}"
+                                                           FontSize="20"
+                                                           FontWeight="Bold"
+                                                           Foreground="Red"/>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon Kind="FileOutline"
+                                                                 Width="60"
+                                                                 Height="60"
+                                                                 HorizontalAlignment="Right"
+                                                                 VerticalAlignment="Center" 
+                                                                 Margin="10"
+                                                                 Foreground="#f9a925" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="1">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <TextBlock Text="QUY HOẠCH"
+                                                           FontWeight="DemiBold"
+                                                           VerticalAlignment="Bottom"/>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <TextBlock Text="{Binding cellProjectInfo.planning}"
+                                                           FontSize="20"
+                                                           FontWeight="Bold"
+                                                           Foreground="Red"
+                                                           TextWrapping="Wrap"/>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon Kind="ClipboardTextMultipleOutline"
+                                                                 Width="60"
+                                                                 Height="60"
+                                                                 HorizontalAlignment="Right"
+                                                                 VerticalAlignment="Center" 
+                                                                 Margin="10"
+                                                                 Foreground="#f9a925" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="1">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <TextBlock Text="THỜI GIAN BÀN GIAO"
+                                                           FontWeight="DemiBold"
+                                                           VerticalAlignment="Bottom"/>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <TextBlock Text="{Binding cellProjectInfo.handoverTime}"
+                                                           FontSize="20"
+                                                           FontWeight="Bold"
+                                                           Foreground="Red"/>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon Kind="CalendarMonthOutline" 
+                                                                 Width="60"
+                                                                 Height="60"
+                                                                 HorizontalAlignment="Right"
+                                                                 VerticalAlignment="Center" 
+                                                                 Margin="10"
+                                                                 Foreground="#f9a925" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="2" Grid.Column="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="1">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <TextBlock Text="GIÁ BÁN"
+                                                           FontWeight="DemiBold"
+                                                           VerticalAlignment="Bottom"/>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <TextBlock Text="{Binding cellProjectInfo.salePrice}"
+                                                           FontSize="20"
+                                                           FontWeight="Bold"
+                                                           Foreground="Red"/>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon Kind="CurrencyUsd"
+                                                                 Width="60"
+                                                                 Height="60"
+                                                                 HorizontalAlignment="Right"
+                                                                 VerticalAlignment="Center" 
+                                                                 Margin="10"
+                                                                 Foreground="#f9a925" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <TextBlock Text="{Binding cellProjectInfo.overview}"
+                               FontWeight="DemiBold"
+                               TextWrapping="Wrap"></TextBlock>
+
+                        <TextBlock Text="VỊ TRÍ DỰ ÁN" FontWeight="Bold" Foreground="Brown"
+                               Margin="0 10"></TextBlock>
+                        <TextBlock Text="{Binding cellProjectInfo.location}"
+                               FontWeight="DemiBold"
+                               TextWrapping="Wrap"></TextBlock>
+                        <Rectangle Width="800"
+                               Height="400" 
+                                   Visibility="{Binding isAnhViTri}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding AnhViTri}"></ImageBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                        <TextBlock Text="MẶT BẰNG DỰ ÁN" FontWeight="Bold" Foreground="Brown"
+                               Margin="0 10"></TextBlock>
+                        <Rectangle Width="800"
+                               Height="400" 
+                                   Visibility="{Binding isAnhMatBang}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding AnhMatBang}"></ImageBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="{Binding cellProjectInfo.masterPlan}"
+                               FontWeight="DemiBold"
+                               TextWrapping="Wrap"></TextBlock>
+
+
+                        <TextBlock Text="TIỆN TÍCH DỰ ÁN" FontWeight="Bold" Foreground="Brown"
+                               Margin="0 10"></TextBlock>
+                        <TextBlock Text="{Binding cellProjectInfo.utilities}"
+                               FontWeight="DemiBold"
+                               TextWrapping="Wrap"></TextBlock>
+                        <Rectangle Width="800"
+                               Height="400" 
+                                   Visibility="{Binding isAnhTienTich}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding AnhTienTich}"></ImageBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </StackPanel>
+                </materialDesign:Card>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

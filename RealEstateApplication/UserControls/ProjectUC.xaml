@@ -12,81 +12,64 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
              DataContext="{StaticResource ProjectVM}"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <!--Grid main uc-->
+             d:DesignHeight="670" d:DesignWidth="1000">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedProjectInfoCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="64"></RowDefinition>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        
-        <!--Thanh tìm kiếm-->
-        <Grid Grid.Row="0"
+        <!--Grid main uc-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64"></RowDefinition>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Thanh tìm kiếm-->
+            <Grid Grid.Row="0"
               Background="#E5000000">
-            <Grid Grid.Row="0">
-                <Grid Margin="10"
+                <Grid Grid.Row="0">
+                    <Grid Margin="10"
                               Background="White">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <!--Loại Hình-->
-                    <Grid Grid.Column="0">
-                        <ComboBox   materialDesign:HintAssist.Hint="Loại Hình"
-                                            HorizontalContentAlignment="Center"
-                                            VerticalContentAlignment="Center"
-                                            IsEditable="True"
-                                            materialDesign:HintAssist.HintOpacity=".26">
-                            <ComboBoxItem>
-                                Apple
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                Banana
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                Pear
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                Orange
-                            </ComboBoxItem>
-                        </ComboBox>
-                    </Grid>
-                    <!--Ô tìm kiếm-->
-                    <Grid Grid.Column="1"
-                                  Margin="5 0 0 0">
-                        <TextBox x:Name="CommentTextBox"
-                                         VerticalContentAlignment="Center"
-                                     materialDesign:HintAssist.Hint="Nhập địa điểm hoặc dự án..." />
-                    </Grid>
-                    <!--Khu vực-->
-                    <Grid Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--Ô tìm kiếm-->
                         <Grid Grid.Column="0"
-                              Margin="5 0 5 0">
-                            <ComboBox   materialDesign:HintAssist.Hint="Khu vực"
-                                            HorizontalContentAlignment="Center"
-                                            VerticalContentAlignment="Center"
-                                            IsEditable="True"
-                                            materialDesign:HintAssist.HintOpacity=".26">
-                                <ComboBoxItem>
-                                    Apple
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Banana
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Pear
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Orange
-                                </ComboBoxItem>
-                            </ComboBox>
+                                  Margin="5 0 0 0">
+                            <TextBox x:Name="CommentTextBox"
+                                         VerticalContentAlignment="Center"
+                                     materialDesign:HintAssist.Hint="Nhập tên dự án..." 
+                                     Text="{Binding TimKiemTen}"/>
                         </Grid>
-                    </Grid>
-                    <!--Nút tìm kiếm-->
-                    <Grid Grid.Column="3">
-                        <Button 
+                        <!--Khu vực-->
+                        <Grid Grid.Column="1">
+                            <Grid Grid.Column="0"
+                              Margin="5 0 5 0">
+                                <TextBox x:Name="TextBoxQuanHuyen"
+                                         VerticalContentAlignment="Center"
+                                     materialDesign:HintAssist.Hint="Nhập quận\huyện..." 
+                                         Text="{Binding TimKiemQuanHuyen}"/>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <Grid Grid.Column="0"
+                              Margin="5 0 5 0">
+                                <TextBox x:Name="TextBoxTinhThanhPho"
+                                         VerticalContentAlignment="Center"
+                                     materialDesign:HintAssist.Hint="Nhập tỉnh\thành phố..." 
+                                         Text="{Binding TimKiemTinhThanhPho}"/>
+                            </Grid>
+                        </Grid>
+
+                        <!--Nút tìm kiếm-->
+                        <Grid Grid.Column="3">
+                            <Button 
                                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                     Width="auto"
                                     Margin="2"
@@ -95,234 +78,130 @@
                                     Background="Beige" 
                                     BorderBrush="Beige"
                                     Foreground="Black">
-                            Tìm Kiếm
-                        </Button>
+                                Tìm Kiếm
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding ClickTimKiemCommand}"
+                                                           CommandParameter="{Binding ElementName=mydatagrid}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </Grid>
                     </Grid>
+
                 </Grid>
 
             </Grid>
 
-        </Grid>
-        
-        <!--Các kết quả tìm được-->
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="44"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
+            <!--Các kết quả tìm được-->
+            <Grid Visibility="Visible" Grid.Row="1">
+                <DataGrid 
+                    GridLinesVisibility="None"
+                    SelectedValue="{Binding DisplayPJ, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding ListProjects, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    ColumnWidth="*"
+                    CanUserSortColumns="True"
+                    CanUserAddRows="False"
+                    AutoGenerateColumns="False"
+                    x:Name="mydatagrid"
+                    Background="Transparent"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedCellsChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectedCellsChangedPJCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn
+                            Width="*">
+                            <DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="SemiBold"></Setter>
+                                    <Setter Property="FontSize" Value="16"></Setter>
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTemplateColumn.HeaderStyle>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <materialDesign:Card Height="120" Margin="10">
+                                        <Grid Width="1000" Height="110" HorizontalAlignment="Left">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                                <ColumnDefinition Width="600"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column ="0" HorizontalAlignment="Left" >
+                                                <Rectangle Width="150"
+                                                            Height="110">
+                                                    <Rectangle.Fill>
+                                                        <ImageBrush ImageSource="{Binding ImageViewer}"></ImageBrush>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                    </Grid.RowDefinitions>
 
-                <!--ô 0-0-->
-                <Grid Grid.Row="0" Grid.Column="0"
-                      Margin="10 10 5 5">
-                    <Border BorderBrush="White" BorderThickness="3" Background="Transparent">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="2*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <!--hình-->
-                            <Grid Grid.Row="0">
-                                <Image Source="la-melodie-bao-loc.jpg"
-                               Stretch="Fill"></Image>
-                            </Grid>
-                            <!--Tiêu đề-->
-                            <Grid Grid.Row="1">
-                                <Button Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Foreground="OrangeRed"
-                                    Content="La Melodie Bảo Lộc"
-                                    HorizontalAlignment="Left"
-                                    HorizontalContentAlignment="Left"
-                                    FontSize="18"></Button>
-                            </Grid>
-                            <!--Thông tin-->
-                            <Grid Grid.Row="2">
-                                <StackPanel Margin="20 0 0 0">
-                                    <TextBlock Text="Chủ đầu tư: Công ty cổ phần  Thông Minh"></TextBlock>
-                                    <TextBlock Text="Địa chỉ: Xã Đam Bri, Bảo Lộc, Lâm Đồng"></TextBlock>
-                                    <TextBlock Text="Quy mô: 36ha"></TextBlock>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </Grid>
+                                                    <Grid Grid.Row="0">
+                                                        <TextBlock FontWeight="Bold" 
+                                                                Text="{Binding projectinfo.name}" 
+                                                                Foreground="Black" 
+                                                                VerticalAlignment="Center" 
+                                                                Margin="20 0 0 0"></TextBlock>
+                                                    </Grid>
+                                                    <Grid Grid.Row="1">
+                                                        <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
+                                                            <materialDesign:PackIcon Foreground="Red" Kind="CurrencyUsd" Width="25" Height="25" VerticalAlignment="Center"/>
+                                                            <TextBlock Text="  Giá: " Foreground="Red" VerticalAlignment="Center"></TextBlock>
+                                                            <TextBlock Text="{Binding projectinfo.salePrice}" Foreground="Red" VerticalAlignment="Center"></TextBlock>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                    <Grid Grid.Row="2">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="27*"/>
+                                                            <ColumnDefinition Width="173*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="20 0 0 0">
+                                                            <materialDesign:PackIcon Margin="3 0 10 0" Kind="ChartPie" Foreground="Black" VerticalAlignment="Center" Width="20" Height="20"/>
+                                                            <TextBlock Text="Quy mô: " Foreground="black" VerticalAlignment="Center"></TextBlock>
+                                                            <TextBlock Text="{Binding projectinfo.scale}" Foreground="black" VerticalAlignment="Center"></TextBlock>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                    <Grid Grid.Row="3">
+                                                        <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
+                                                            <materialDesign:PackIcon Kind="MapMarkerOutline" Foreground="Black" VerticalAlignment="Center" Width="25" Height="25"/>
+                                                            <TextBlock Text="{Binding projectinfo.address}" Foreground="Black" VerticalAlignment="Center" Margin="10 0 0 0"></TextBlock>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
 
-                <!--ô 01-->
-                <Grid Grid.Row="0" Grid.Column="1"
-                      Margin="5 10 10 5">
-                    <Border BorderBrush="White" BorderThickness="3" Background="Transparent">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="2*"></RowDefinition>
-                            </Grid.RowDefinitions>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <i:InvokeCommandAction 
+                                                            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=DataContext.ClickDuAnCommand}" 
+                                                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </materialDesign:Card>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                            <!--Hình-->
-                            <Grid Grid.Row="0">
-                                <Image Source="la-melodie-bao-loc.jpg"
-                               Stretch="Fill"></Image>
-                            </Grid>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-                            <!--tiêu đề-->
-                            <Grid Grid.Row="1">
-                                <Button Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Foreground="OrangeRed"
-                                    Content="La Melodie Bảo Lộc"
-                                    HorizontalAlignment="Left"
-                                    HorizontalContentAlignment="Left"
-                                    FontSize="18"></Button>
-                            </Grid>
-                            <!--thông tin-->
-                            <Grid Grid.Row="2">
-                                <StackPanel Margin="20 0 0 0">
-                                    <TextBlock Text="Chủ đầu tư: Công ty cổ phần  Thông Minh"></TextBlock>
-                                    <TextBlock Text="Địa chỉ: Xã Đam Bri, Bảo Lộc, Lâm Đồng"></TextBlock>
-                                    <TextBlock Text="Quy mô: 36ha"></TextBlock>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </Grid>
-
-                <!--ô 10-->
-                <Grid Grid.Row="1" Grid.Column="0"
-                      Margin="10 5 5 10">
-                    <Border BorderBrush="White" BorderThickness="3" Background="Transparent">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="2*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <!--hình-->
-                            <Grid Grid.Row="0">
-                                <Image Source="la-melodie-bao-loc.jpg"
-                               Stretch="Fill"></Image>
-
-                            </Grid>
-                            <!--Tiêu đề-->
-                            <Grid Grid.Row="1">
-                                <Button Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Foreground="OrangeRed"
-                                    Content="La Melodie Bảo Lộc"
-                                    HorizontalAlignment="Left"
-                                    HorizontalContentAlignment="Left"
-                                    FontSize="18"></Button>
-                            </Grid>
-                            <!--Thông tin-->
-                            <Grid Grid.Row="2">
-                                <StackPanel Margin="20 0 0 0">
-                                    <TextBlock Text="Chủ đầu tư: Công ty cổ phần  Thông Minh"></TextBlock>
-                                    <TextBlock Text="Địa chỉ: Xã Đam Bri, Bảo Lộc, Lâm Đồng"></TextBlock>
-                                    <TextBlock Text="Quy mô: 36ha"></TextBlock>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </Grid>
-
-                <!--Ô 11-->
-                <Grid Grid.Row="1" Grid.Column="1"
-                      Margin="5 5 10 10">
-                    <Border BorderBrush="White" BorderThickness="3" Background="Transparent">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="2*"></RowDefinition>
-                            </Grid.RowDefinitions>
-
-                            <!--hình-->
-                            <Grid Grid.Row="0">
-                                <Image Source="la-melodie-bao-loc.jpg"
-                               Stretch="Fill"></Image>
-                            </Grid>
-
-                            <!--Tiêu đề-->
-                            <Grid Grid.Row="1">
-                                <Button Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Foreground="OrangeRed"
-                                    Content="La Melodie Bảo Lộc"
-                                    HorizontalAlignment="Left"
-                                    HorizontalContentAlignment="Left"
-                                    FontSize="18"></Button>
-                            </Grid>
-
-                            <!--thông tin-->
-                            <Grid Grid.Row="2">
-                                <StackPanel Margin="20 0 0 0">
-                                    <TextBlock Text="Chủ đầu tư: Công ty cổ phần  Thông Minh"></TextBlock>
-                                    <TextBlock Text="Địa chỉ: Xã Đam Bri, Bảo Lộc, Lâm Đồng"></TextBlock>
-                                    <TextBlock Text="Quy mô: 36ha"></TextBlock>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Grid>
-
-            <!--grid chứa nút nexpage-->
-            <Grid Grid.Row="1" Background="Transparent">
-                <StackPanel HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Orientation="Horizontal">
-                    <!--style của list nút-->
-                    <StackPanel.Resources>
-                        <Style TargetType="Button" x:Key="styleBtnNextPage">
-                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                            <Setter Property="Background" Value="White"></Setter>
-                            <Setter Property="BorderBrush" Value="Black"></Setter>
-                            <Setter Property="Foreground" Value="Black"></Setter>
-                            <Setter Property="Padding" Value="0"></Setter>
-                            <Setter Property="Height" Value="30"></Setter>
-                            <Setter Property="Width" Value="30"></Setter>
-                            <Setter Property="Margin" Value="4 0 2 0 "></Setter>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-                            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-                        </Style>
-                    </StackPanel.Resources>
-                    <!--nút quay lại-->
-                    <Button Content="&lt;" 
-                            FontSize="18"
-                            Padding="0 0 0 4"
-                            FontWeight="DemiBold"
-                            Visibility="Collapsed"
-                        Style="{StaticResource styleBtnNextPage}"></Button>
-                    <!--List danh sách trang-->
-                    <Button Content="1" 
-                            Background="Beige"
-                        Style="{StaticResource styleBtnNextPage}"></Button>
-                    <Button Content="2" 
-                        Style="{StaticResource styleBtnNextPage}"></Button>
-                    <Button Content="3" 
-                        Style="{StaticResource styleBtnNextPage}"></Button>
-                    <Button Content="4" 
-                        Style="{StaticResource styleBtnNextPage}"></Button>
-                    <Button Content="5" 
-                        Style="{StaticResource styleBtnNextPage}"></Button>
-                    <!--nút tiến tới-->
-                    <Button Content="&gt;" 
-                            FontSize="18"
-                             Padding="0 0 0 4"
-                            FontWeight="DemiBold"
-                        Style="{StaticResource styleBtnNextPage}"></Button>
-                </StackPanel>
             </Grid>
         </Grid>
     </Grid>
+
 </UserControl>

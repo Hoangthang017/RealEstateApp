@@ -5,7 +5,24 @@
       <EntityTypeMapping TypeName="RealEstateManagementModel.ProjectInfo">
         <MappingFragment StoreEntitySet="ProjectInfo">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="scale" ColumnName="scale" />
+          <ScalarProperty Name="area" ColumnName="area" />
+          <ScalarProperty Name="legal" ColumnName="legal" />
+          <ScalarProperty Name="planning" ColumnName="planning" />
+          <ScalarProperty Name="handoverTime" ColumnName="handoverTime" />
+          <ScalarProperty Name="salePrice" ColumnName="salePrice" />
+          <ScalarProperty Name="introduce" ColumnName="introduce" />
+          <ScalarProperty Name="overview" ColumnName="overview" />
+          <ScalarProperty Name="overviewImage" ColumnName="overviewImage" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="locationImage" ColumnName="locationImage" />
+          <ScalarProperty Name="masterPlan" ColumnName="masterPlan" />
+          <ScalarProperty Name="masterPlanImage" ColumnName="masterPlanImage" />
+          <ScalarProperty Name="utilities" ColumnName="utilities" />
+          <ScalarProperty Name="utilitiesImage" ColumnName="utilitiesImage" />
+          <ScalarProperty Name="investor" ColumnName="investor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -14,14 +31,14 @@
         <MappingFragment StoreEntitySet="RealEstateInfo">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="title" ColumnName="title" />
-          <ScalarProperty Name="typeRealEstate" ColumnName="typeRealEstate" />
+          <ScalarProperty Name="type" ColumnName="type" />
           <ScalarProperty Name="img" ColumnName="img" />
-          <ScalarProperty Name="descriptRealEstate" ColumnName="descriptRealEstate" />
+          <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="locationRealEstate" ColumnName="locationRealEstate" />
+          <ScalarProperty Name="location" ColumnName="location" />
           <ScalarProperty Name="area" ColumnName="area" />
           <ScalarProperty Name="timepost" ColumnName="timepost" />
-          <ScalarProperty Name="addressRealEstate" ColumnName="addressRealEstate" />
+          <ScalarProperty Name="address" ColumnName="address" />
           <ScalarProperty Name="streetWidth" ColumnName="streetWidth" />
           <ScalarProperty Name="orientation" ColumnName="orientation" />
           <ScalarProperty Name="width" ColumnName="width" />

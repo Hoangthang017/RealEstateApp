@@ -1,11 +1,14 @@
 ﻿
-FD:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\App.xaml;;
-FD:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\MainWindow.xaml;;
-FD:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\ResourcesXAML\MainResources.xaml;;
-FD:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\UserControls\DetailUC.xaml;;
-FD:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\UserControls\Homepage.xaml;;
-FD:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\UserControls\ProjectUC.xaml;;
-FD:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\UserControls\PurchaseUC.xaml;;
-FD:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\UserControls\RentUC.xaml;;
-FD:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\LoanWindow.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\App.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\LoanWindow.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\MainWindow.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\ResourcesXAML\MainResources.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\UserControls\ChiTietDeXuat.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\UserControls\ChiTietDuAn.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\UserControls\DetailUC.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\UserControls\DeXuatUC.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\UserControls\Homepage.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\UserControls\ProjectUC.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\UserControls\PurchaseUC.xaml;;
+FC:\Môn\CS522.M11\RealEstateApp\RealEstateApplication\UserControls\RentUC.xaml;;
 

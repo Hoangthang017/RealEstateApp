@@ -15,16 +15,16 @@ namespace RealEstateApplication.Model
 
     public partial class RealEstateInfo
     {
-        public int id { get; set; }
+        public string id { get; set; }
         public string title { get; set; }
-        public string typeRealEstate { get; set; }
+        public string type { get; set; }
         public string img { get; set; }
-        public string descriptRealEstate { get; set; }
+        public string description { get; set; }
         public string price { get; set; }
-        public string locationRealEstate { get; set; }
+        public string location { get; set; }
         public Nullable<int> area { get; set; }
         public System.DateTime timepost { get; set; }
-        public string addressRealEstate { get; set; }
+        public string address { get; set; }
         public Nullable<int> streetWidth { get; set; }
         public string orientation { get; set; }
         public Nullable<int> width { get; set; }
@@ -34,8 +34,7 @@ namespace RealEstateApplication.Model
         public Nullable<int> toilets { get; set; }
         public string furniture { get; set; }
         public string legalDocument { get; set; }
-        public Nullable<int> projectId { get; set; }
-
+        public string projectId { get; set; }
         // thêm source thẳng vào database / dấu bình phương
         public ImageSource imageSource { get; set; }
         public string squareRoot { get; set; }

@@ -23,90 +23,234 @@
                                    CommandParameter="{Binding ElementName=gridMainContent}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
-    <!--grid main window-->
-    <Grid Background="AliceBlue">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid Background="AliceBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-        <!--cột bên trái-->
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="5*"></RowDefinition>
-            </Grid.RowDefinitions>
+            <!--cột bên trái-->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <!--Logo-->
-                <Image Source="myLogo.png"
+                <Grid Grid.Row="0">
+                    <!--Logo-->
+                    <Image Source="myLogo.png"
                        Stretch="Fill"></Image>
-            </Grid>
+                </Grid>
 
-            <!--menu-->
-            <Grid Grid.Row="1"
+                <!--menu-->
+                <Grid Grid.Row="1"
                   Background="Azure">
-                <StackPanel>
-                    <!--resource của các button của menu-->
-                    <StackPanel.Resources>
-                        <Style TargetType="Button" x:Key="styleBtnMenu">
-                            <Setter Property="Width" Value="auto"></Setter>
-                            <Setter Property="Height" Value="auto"></Setter>
-                            <Setter Property="Padding" Value="10"></Setter>
-                            <Setter Property="Foreground" Value="Black"></Setter>
-                            <Setter Property="BorderBrush" Value="Transparent"></Setter>
-                            <Setter Property="Background" Value="Beige"></Setter>
-                        </Style>
-                    </StackPanel.Resources>
+                    <StackPanel>
+                        <!--resource của các button của menu-->
+                        <StackPanel.Resources>
+                            <Style TargetType="Button" x:Key="styleBtnMenu">
+                                <Setter Property="Width" Value="auto"></Setter>
+                                <Setter Property="Height" Value="auto"></Setter>
+                                <Setter Property="Padding" Value="10"></Setter>
+                                <Setter Property="Foreground" Value="Black"></Setter>
+                                <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                                <Setter Property="Background" Value="Beige"></Setter>
+                            </Style>
+                        </StackPanel.Resources>
 
-                    <!--nút trang chủ-->
-                    <Button
+                        <!--nút trang chủ-->
+                        <Button
                         Content="Trang chủ"
                         FontWeight="Bold"
                         Command="{Binding OpenHomepageUCCommand}"
                         CommandParameter="{Binding ElementName=gridMainContent}"
                         Style="{StaticResource styleBtnMenu}"
                         ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
-                    </Button>
+                        </Button>
 
-                    <!--nút mua bán nhà đất-->
-                    <Button
+                        <!--nút mua bán nhà đất-->
+                        <Button
                         Content="Mua Bán Nhà Đất"
                         FontWeight="Bold"
                         Style="{StaticResource styleBtnMenu}"
                         Command="{Binding OpenPurchaseUCCommand}"
                         CommandParameter="{Binding ElementName=gridMainContent}"
                         ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
-                    </Button>
+                        </Button>
 
-                    <!--nút thuê nhà-->
-                    <Button
+                        <!--nút thuê nhà-->
+                        <Button
                         Content="Thuê Nhà Đất"
                         FontWeight="Bold"
                         Style="{StaticResource styleBtnMenu}"
                         Command="{Binding OpenRentUCCommand}"
                         CommandParameter="{Binding ElementName=gridMainContent}"
                         ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
-                    </Button>
+                        </Button>
 
-                    <!--nút dự án-->
-                    <Button
+                        <!--nút dự án-->
+                        <Button
                         Content="Dự Án"
                         FontWeight="Bold"
                         Style="{StaticResource styleBtnMenu}"
                         Command="{Binding OpenProjectUCCommand}"
                         CommandParameter="{Binding ElementName=gridMainContent}"
                         ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
-                    </Button>
-                </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </Grid>
-        </Grid>
-        
-        <!--form mở usercontrols-->
-        <Grid Grid.Column="1"
+
+            <!--form mở usercontrols-->
+            <Grid Grid.Column="1"
               x:Name="gridMainContent"
               Background="#FFA6FDFF">
+            </Grid>
+        </Grid>
+
+        <Grid Margin="15 556 1148 15" Width="70" Height="70">
+            <Button
+                x:Name="ButtonMoTab"
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton"
+                IsEnabled="True"
+                Background="#4665f4"
+                Width="50"
+                Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Visibility="{Binding isMoTab}">
+                <materialDesign:PackIcon Kind="ChevronUp" 
+                                         Width="40"  
+                                         Height="40" 
+                                         HorizontalAlignment="Center" 
+                                         VerticalAlignment="Center"
+                                         />
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding MoIconCommand}"
+                                   CommandParameter="{Binding ElementName=ButtonMoTab}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+
+            <Button
+                x:Name="ButtonDongTab"
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton"
+                IsEnabled="True"
+                Background="#4665f4"
+                Width="50"
+                Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                Visibility="{Binding isDongTab}" Margin="10,0,10,10">
+                <materialDesign:PackIcon Kind="Close"
+                                         Width="40"  
+                                         Height="40" 
+                                         HorizontalAlignment="Center" 
+                                         VerticalAlignment="Center"
+                                         />
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding DongIconCommand}"
+                                   CommandParameter="{Binding ElementName=ButtonDongTab}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </Grid>
+
+        <Grid x:Name="gridDanhChoBan"
+                          Visibility="{Binding isDanhChoBan}"
+                          Height="300"
+                          Opacity="0.95"
+                          Width="200"
+                          Margin="15 260 1010 15"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Top">
+            <Border BorderThickness="1"
+                                CornerRadius="10"
+                                BorderBrush="Black"
+                                Background="White">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.4*"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="Dành cho bạn" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Vertical"
+                                            Margin="5">
+                            <TextBlock Text="Tỉnh/Thành Phố:"
+                                                   FontWeight="SemiBold"></TextBlock>
+                            <TextBox 
+                                x:Name="textTinhThanhPho"
+                                Text="{Binding NhapTinhThanhPho, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                HorizontalAlignment="Left"
+                                Width="184"
+                                materialDesign:HintAssist.Hint="Nhập tỉnh/thành phố...">
+                            </TextBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Quận/Huyện:"
+                                                   FontWeight="SemiBold"></TextBlock>
+                            <TextBox 
+                                Text="{Binding NhapQuanHuyen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                HorizontalAlignment="Left"
+                                Width="184"
+                                 materialDesign:HintAssist.Hint="Nhập quận/huyện...">
+                            </TextBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Xã/Phường:"
+                                                   FontWeight="SemiBold"></TextBlock>
+                            <TextBox 
+                                Text="{Binding NhapXaPhuong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                HorizontalAlignment="Left"
+                                Width="184"
+                                 materialDesign:HintAssist.Hint="Nhập xã/phường...">
+                            </TextBox>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="4">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Số nhà:"
+                                                   FontWeight="SemiBold"></TextBlock>
+                            <TextBox 
+                                Text="{Binding NhapSoNha, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                HorizontalAlignment="Left"
+                                Width="184"
+                                 materialDesign:HintAssist.Hint="Nhập số nhà...">
+                            </TextBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                            <Button Content="Tìm kiếm"
+                                    Background="#1e98d7"
+                                    BorderBrush="#1e98d7"
+                                    Foreground="White"
+                                        Command="{Binding MoDanhChoBanUCCommand}"
+                                        CommandParameter="{Binding ElementName=gridMainContent}"
+                                        Height="30"
+                                        Padding="0"
+                                        Margin="20 0 0 0"
+                                        Width="100"></Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
+    <!--grid main window-->
+    
 </Window>
