@@ -44,3 +44,4 @@ D:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\obj\Debug\RealE
 D:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\obj\Debug\RealEstateApplication.pdb
 D:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\obj\Debug\LoanWindow.g.cs
 D:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\obj\Debug\LoanWindow.baml
+D:\University\Nam4_Ky1\CS552\RealEstateApp\RealEstateApplication\obj\Debug\RealEstateApplication.csprojAssemblyReference.cache
