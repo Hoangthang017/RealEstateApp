@@ -109,30 +109,6 @@ namespace RealEstateApplication.ViewModel
             // load user control
             LoadedUserControlsCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                VisibleGridMoreFilter = Visibility.Collapsed;
-
-                // create 
-                Reset();
-
-                // list filter
-                ListFilter = new List<string>()
-                {
-                    "Mới Nhất",
-                    "Giá Cao Nhất",
-                    "Giá Thấp Nhất"
-                };
-                // mũ bình phương
-                DisplaySquareRoot = "\u00b2";
-
-                // load list data
-                ListTypeSellRE = new List<string>();
-                ListTypeSellRE = Filter.ListTypeSellRE;
-                ListLocation = new List<string>();
-                ListLocation = Filter.ListAddressRE;
-                ListPrice = new List<string>();
-                ListPrice = Filter.ListPriceRE;
-                ListArea = new List<string>();
-                ListArea = Filter.ListAreaRE;
 
                 // load data
                 if (BackupListRE.Container != null)
@@ -148,8 +124,7 @@ namespace RealEstateApplication.ViewModel
                     DisplayDistrict = BackupListRE.Container.DisplayDistrict;
                     BackupListRE.Clear();
                 }
-
-                if (ListViewRE == null || ListViewRE.Count == 0)
+                else
                 {
                     ListViewRE = new ObservableCollection<RealEstateInfo>(DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.type.Contains("Bán ") == true).ToList());
                     DisplayTypeRE = null;
@@ -160,22 +135,53 @@ namespace RealEstateApplication.ViewModel
                     ListViewQueryRE = ListViewRE;
                 }
 
+                VisibleGridMoreFilter = Visibility.Collapsed;
+
+                var check = BackupListRE.Container;
+
+                // create 
+                //Reset();
+
+                // list filter
+                if (ListFilter == null)
+                {
+                    ListFilter = new List<string>()
+                        {
+                            "Mới Nhất",
+                            "Giá Cao Nhất",
+                            "Giá Thấp Nhất"
+                        };
+                }
+
+                // mũ bình phương
+                DisplaySquareRoot = "\u00b2";
+
+                // load list data
+                if (ListTypeSellRE == null)
+                {
+                    ListTypeSellRE = new List<string>();
+                    ListTypeSellRE = Filter.ListTypeSellRE;
+                }
+                if (ListLocation == null)
+                {
+                    ListLocation = new List<string>();
+                    ListLocation = Filter.ListAddressRE;
+                }
+                if (ListPrice == null)
+                {
+                    ListPrice = new List<string>();
+                    ListPrice = Filter.ListPriceRE;
+                }
+                if (ListArea == null)
+                {
+                    ListArea = new List<string>();
+                    ListArea = Filter.ListAreaRE;
+                }
             });
 
             // sự kiện thay đổi lựu chọn loại bất động sản
             SelectionChangedTypeRECommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                //if (_Backup == false)
-                //{
-                //    DisplayFilter = null;
-                //    DisplayCity = null;
-                //    DisplayArea = null;
-                //    DisplayPrice = null;
-                //}
-                //else
-                //{
-                //    _Backup = false;
-                //}
                 if (string.IsNullOrEmpty(DisplayTypeRE) == false)
                 {
                     ListViewRE = new ObservableCollection<RealEstateInfo>(Filter.FilterTypeRE("Bán", DisplayTypeRE));
@@ -232,7 +238,7 @@ namespace RealEstateApplication.ViewModel
             {
                 if (DisplayRE != null)
                 {
-                    BackupListRE.Container = new Container()
+                    var newContainer = new Container()
                     {
                         Purchase = true,
                         BackupViewRE = ListViewRE.ToList(),
@@ -244,7 +250,14 @@ namespace RealEstateApplication.ViewModel
                         DisplayTypeRE = DisplayTypeRE,
                         ViewRE = DisplayRE
                     };
-                    OpenUC.OpenChildUC(new DetailUC());
+                    if (BackupListRE.Container != null)
+                    {
+                        BackupListRE.Container.Clear();
+                    }
+                    BackupListRE.Container = newContainer;
+                    var child = new DetailUC();
+                    child.DataContext = new DetailViewModel();
+                    OpenUC.OpenChildUC(child);
                 }
             });
 
@@ -280,8 +293,6 @@ namespace RealEstateApplication.ViewModel
             {
                 ListViewQueryRE = new ObservableCollection<RealEstateInfo>(ListViewQueryRE.Where(x => x.title.ToLower().Contains(Query) == true).ToList());
             }
-
-            
 
             if (string.IsNullOrEmpty(DisplayFilter) == false)
             {
@@ -322,13 +333,14 @@ namespace RealEstateApplication.ViewModel
         // reset
         private void Reset()
         {
-            DisplayTypeRE = null;
-            DisplayFilter = null;
-            DisplayCity = null;
-            DisplayArea = null;
-            DisplayPrice = null;
-            ListViewRE = new ObservableCollection<RealEstateInfo>();
-            ListViewQueryRE = new ObservableCollection<RealEstateInfo>();
+            ListArea = null;
+            ListDistrict = null;
+            ListFilter = null;
+            ListLocation = null;
+            ListPrice = null;
+            ListTypeSellRE = null;
+            ListViewQueryRE = null;
+            ListWard = null;
         }
     }
 }

@@ -46,6 +46,7 @@ namespace RealEstateApplication.ViewModel
             // nút quay trở lại
             ClickComebackCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+
                 OpenUC.OpenChildUC(new DeXuatUC());
             });
 

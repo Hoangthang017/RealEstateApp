@@ -6,7 +6,7 @@
 
         public static void Clear()
         {
-            Container = new Container();
+            Container = null;
         }
     }
 }
