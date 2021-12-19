@@ -324,6 +324,7 @@
                                 <StackPanel>
                                     <TextBlock Text="Số nhà: "></TextBlock>
                                     <TextBox
+                                        Text="{Binding NhapSoNha, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Width="120"></TextBox>
                                 </StackPanel>
                             </Grid>
@@ -332,6 +333,7 @@
                                 <StackPanel>
                                     <TextBlock Text="Xã/Phường: "></TextBlock>
                                     <TextBox
+                                        Text="{Binding NhapXaPhuong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Width="120"></TextBox>
                                 </StackPanel>
                             </Grid>
@@ -340,6 +342,7 @@
                                 <StackPanel>
                                     <TextBlock Text="Huyện/Quận: "></TextBlock>
                                     <TextBox
+                                        Text="{Binding NhapQuanHuyen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Width="120"></TextBox>
                                 </StackPanel>
                             </Grid>
@@ -348,6 +351,7 @@
                                 <StackPanel>
                                     <TextBlock Text="Tỉnh/Thành phố: "></TextBlock>
                                     <TextBox
+                                        Text="{Binding NhapTinhThanhPho, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Width="120"></TextBox>
                                 </StackPanel>
                             </Grid>
@@ -362,7 +366,9 @@
                             Content="Tìm kiếm"
                             BorderBrush="Transparent"
                             Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                            Width="120">
+                            Width="120"
+                            Command="{Binding MoDanhChoBanUCCommand}"
+                            CommandParameter="{Binding ElementName=gridMainContent}">
                         </Button>
                     </Grid>
                 </Grid>
