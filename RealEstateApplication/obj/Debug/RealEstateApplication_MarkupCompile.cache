@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\University\Nam4_Ky1\CS552\AppBDS\RealEstateApp\RealEstateApplication\obj\Debug\
+C:\Môn\CS522.M11\19122021\RealEstateApp\RealEstateApplication\obj\Debug\
 RealEstateApplication
 none
 false
 DEBUG;TRACE
-D:\University\Nam4_Ky1\CS552\AppBDS\RealEstateApp\RealEstateApplication\App.xaml
+C:\Môn\CS522.M11\19122021\RealEstateApp\RealEstateApplication\App.xaml
 111148599737
 4-1171695452
-42-36409900
-23-649837020
+41805949467
+23-1595540203
 LoanWindow.xaml;MainWindow.xaml;ResourcesXAML\MainResources.xaml;UserControls\ChiTietDeXuat.xaml;UserControls\ChiTietDuAn.xaml;UserControls\DetailUC.xaml;UserControls\DeXuatUC.xaml;UserControls\Homepage.xaml;UserControls\ProjectUC.xaml;UserControls\PurchaseUC.xaml;UserControls\RentUC.xaml;
 
-True
+False
 
