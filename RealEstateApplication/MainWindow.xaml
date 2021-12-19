@@ -376,7 +376,9 @@
                             Command="{Binding MoDanhChoBanUCCommand}"
                             CommandParameter="{Binding ElementName=gridMainContent}"
                             Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                            Width="120">
+                            Width="120"
+                            Command="{Binding MoDanhChoBanUCCommand}"
+                            CommandParameter="{Binding ElementName=gridMainContent}">
                         </Button>
                     </Grid>
                 </Grid>
