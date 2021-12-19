@@ -168,14 +168,15 @@
             <Border BorderThickness="1"
                                 CornerRadius="10"
                                 BorderBrush="Black"
-                                Background="White" Margin="0,0,-317,0" HorizontalAlignment="Left" Width="517">
+                                Background="White" Margin="0,-43,-317,0" HorizontalAlignment="Left" Width="517">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition Height="1.2*"></RowDefinition>
+                        <RowDefinition Height="1.5*"></RowDefinition>
+                        <RowDefinition></RowDefinition>
                         <RowDefinition Height="40"></RowDefinition>
                     </Grid.RowDefinitions>
 
@@ -211,15 +212,10 @@
                                 VerticalAlignment="Center"
                                 Orientation="Horizontal">
                                 <TextBlock Text="Giới tính: "></TextBlock>
-                                <ComboBox 
+                                <ComboBox SelectedValue="{Binding GioiTinh,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                     Margin="5 0 0 0"
-                                    Width="80">
-                                    <ComboBoxItem>
-                                        Nam
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        Nữ
-                                    </ComboBoxItem>
+                                    Width="80"
+                                          ItemsSource="{Binding ListGioiTinh}">
                                 </ComboBox>
                             </StackPanel>
 
@@ -228,7 +224,7 @@
                                 VerticalAlignment="Center"
                                 Orientation="Horizontal">
                                 <TextBlock Text="Năm sinh: "></TextBlock>
-                                <TextBox
+                                <TextBox Text="{Binding NamSinh,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                     Width="80">
                                 </TextBox>
                             </StackPanel>
@@ -255,22 +251,9 @@
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Margin="5 0 0 0"
+                                ItemsSource="{Binding ListSoNguoi}"
+                                SelectedValue="{Binding SoNguoi, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                 Width="80">
-                                <ComboBoxItem>
-                                    1
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    2
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    3
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    4
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    5+
-                                </ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
                     </Grid>
@@ -292,6 +275,7 @@
                                 Orientation="Horizontal">
                             <TextBlock Text="Mức lương hiện tại: "></TextBlock>
                             <TextBox
+                                Text="{Binding MucLuong,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                 Width="120"></TextBox>
                             <TextBlock 
                                 Margin="5 0 0 0"
@@ -324,7 +308,7 @@
                                 <StackPanel>
                                     <TextBlock Text="Số nhà: "></TextBlock>
                                     <TextBox
-                                        Text="{Binding NhapSoNha, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Text="{Binding NhapSoNha, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                         Width="120"></TextBox>
                                 </StackPanel>
                             </Grid>
@@ -333,7 +317,7 @@
                                 <StackPanel>
                                     <TextBlock Text="Xã/Phường: "></TextBlock>
                                     <TextBox
-                                        Text="{Binding NhapXaPhuong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Text="{Binding NhapXaPhuong, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                         Width="120"></TextBox>
                                 </StackPanel>
                             </Grid>
@@ -351,20 +335,46 @@
                                 <StackPanel>
                                     <TextBlock Text="Tỉnh/Thành phố: "></TextBlock>
                                     <TextBox
-                                        Text="{Binding NhapTinhThanhPho, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Text="{Binding NhapTinhThanhPho, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                         Width="120"></TextBox>
                                 </StackPanel>
                             </Grid>
                         </Grid>
                     </Grid>
-
-                    <Grid Grid.Row="5">
+                    <Grid Grid.Row="5" Margin="5 0 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock 
+                            FontWeight="DemiBold"
+                            FontSize="16"
+                            Grid.Row="0"
+                            Text="Loại hình: "></TextBlock>
+                        <StackPanel 
+                            Margin="10 0 0 0"
+                                Grid.Row="1"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                            <ComboBox 
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Margin="5 0 0 0"
+                                ItemsSource="{Binding ListLoaiHinh}"
+                                SelectedValue="{Binding LoaiHinh,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                Width="120">
+                            </ComboBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="6">
                         <Button
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Background="Green"
                             Content="Tìm kiếm"
                             BorderBrush="Transparent"
+                            Command="{Binding MoDanhChoBanUCCommand}"
+                            CommandParameter="{Binding ElementName=gridMainContent}"
                             Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                             Width="120"
                             Command="{Binding MoDanhChoBanUCCommand}"

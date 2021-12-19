@@ -1,5 +1,6 @@
 ﻿using RealEstateApplication.Model;
 using RealEstateApplication.UserControls;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -48,6 +49,37 @@ namespace RealEstateApplication.ViewModel
         private string _nhapSoNha;
         public string NhapSoNha { get => _nhapSoNha; set { _nhapSoNha = value; OnPropertyChanged(); } }
 
+        //Danh cho bạn
+        private string _GioiTinh;
+        public string GioiTinh { get => _GioiTinh; set { _GioiTinh = value; OnPropertyChanged(); } }
+
+        //Danh cho bạn
+        private int _NamSinh;
+        public int NamSinh { get => _NamSinh; set { _NamSinh = value; OnPropertyChanged(); } }
+
+        //Danh cho bạn
+        private List<string> _ListGioiTinh;
+        public List<string> ListGioiTinh { get => _ListGioiTinh; set { _ListGioiTinh = value; OnPropertyChanged(); } }
+
+        //Danh cho bạn
+        private List<string> _ListLoaiHinh;
+        public List<string> ListLoaiHinh { get => _ListLoaiHinh; set { _ListLoaiHinh = value; OnPropertyChanged(); } }
+        //Danh cho bạn
+        private string _LoaiHinh;
+        public string LoaiHinh { get => _LoaiHinh; set { _LoaiHinh = value; OnPropertyChanged(); } }
+
+        //Danh cho bạn
+        private List<string> _ListSoNguoi;
+        public List<string> ListSoNguoi { get => _ListSoNguoi; set { _ListSoNguoi = value; OnPropertyChanged(); } }
+        //Danh cho bạn
+        private string _SoNguoi;
+        public string SoNguoi { get => _SoNguoi; set { _SoNguoi = value; OnPropertyChanged(); } }
+
+        //Danh cho bạn
+        private double _MucLuong;
+        public double MucLuong { get => _MucLuong; set { _MucLuong = value; OnPropertyChanged(); } }
+
+
         // phương thức khởi tạo
         public MainViewModel()
         {
@@ -59,6 +91,8 @@ namespace RealEstateApplication.ViewModel
                 OpenUC.BackupGridOpenUC = (p as Grid);
 
                 // truyền dữ liệu
+                var child = new Homepage();
+                child.DataContext = new HomepageViewModel();
                 OpenUC.OpenChildUC(new Homepage());
 
                 //
@@ -68,17 +102,56 @@ namespace RealEstateApplication.ViewModel
                 isMoTab = Visibility.Visible;
                 isDongTab = Visibility.Collapsed;
                 isDanhChoBan = Visibility.Collapsed;
+
+                ListGioiTinh = new List<string>()
+                {
+                    "Nam","Nữ"
+                };
+
+                ListLoaiHinh = new List<string>()
+                {
+                    "Mua Nhà","Thuê Nhà"
+                };
+
+                ListSoNguoi = new List<string>()
+                {
+                    "1","2","3","4","5+"
+                };
             });
 
-            OpenHomepageUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC.OpenChildUC(new Homepage()); });
-            OpenPurchaseUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC.OpenChildUC(new PuchaseUC()); });
-            OpenRentUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC.OpenChildUC(new RentUC()); });
-            OpenProjectUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => { OpenUC.OpenChildUC(new ProjectUC()); });
+            OpenHomepageUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                var child = new Homepage();
+                child.DataContext = new HomepageViewModel();
+                OpenUC.OpenChildUC(child); 
+            });
+            OpenPurchaseUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                var child = new PuchaseUC();
+                child.DataContext = new PurchaseViewModel();
+                OpenUC.OpenChildUC(child); 
+            });
+            OpenRentUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                var child = new RentUC();
+                child.DataContext = new RentViewModel();
+                OpenUC.OpenChildUC(new RentUC()); 
+            });
+            OpenProjectUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                OpenUC.OpenChildUC(new ProjectUC()); 
+            });
             MoDanhChoBanUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                passData.Clear();
+
                 passData.passTinhThanhPho = NhapTinhThanhPho;
                 passData.passQuanHuyen = NhapQuanHuyen;
                 passData.passXaHuyen = NhapXaPhuong;
                 passData.passSoNha = NhapSoNha;
+
+                passData.GioiTinh = GioiTinh;
+                passData.NamSinh = NamSinh;
+                passData.LoaiHinh = LoaiHinh;
+                passData.SoNguoi = SoNguoi;
+                passData.MucLuong = MucLuong;
+
+                OpenUC.BackupGridOpenUC = p as Grid;
                 OpenUC.OpenChildUC(new DeXuatUC());
                 isMoTab = Visibility.Visible;
                 isDongTab = Visibility.Collapsed;
