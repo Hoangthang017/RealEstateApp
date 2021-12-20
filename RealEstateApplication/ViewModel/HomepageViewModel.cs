@@ -92,6 +92,7 @@ namespace RealEstateApplication.ViewModel
         public ICommand SelectionChangedAreaCommand { get; set; }
         public ICommand ClickSearchRECommand { get; set; }
         public ICommand SelectionChangedDistrictCommand { get; set; }
+        public ICommand DeleteFilterCommand { get; set; }
         public HomepageViewModel()
         {
             // load user controls
@@ -123,6 +124,19 @@ namespace RealEstateApplication.ViewModel
                 ListViewQueryRE = ListViewRE;
 
                 VisibleGridMoreFilter = Visibility.Collapsed;
+            });
+
+            // xoá filter
+            DeleteFilterCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                DisplayTypeRE = null;
+                DisplayCity = null;
+                DisplayArea = null;
+                DisplayPrice = null;
+                DisplayDistrict = null;
+                DisplayWard = null;
+                ListViewRE = DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.type.Contains("Bán ") == true).ToList();
+                ListViewQueryRE = ListViewRE;
             });
 
             // click mở filter thêm

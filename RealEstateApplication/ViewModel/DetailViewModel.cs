@@ -44,18 +44,27 @@ namespace RealEstateApplication.ViewModel
             {
                 var check = BackupListRE.Container;
                 var child = new PuchaseUC();
+                child.DataContext = new PurchaseViewModel();
                 OpenUC.OpenChildUC(child);
             });
 
             // nút mở giao diện vay tiền
             ClickOpenLoanWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                BackupListRE.Container = new Container()
+                if (BackupListRE.Container != null)
                 {
-                    PriceLoan = DisplayRE.price
-                };
+                    BackupListRE.Container.PriceLoan = DisplayRE.price;
+                }
+                else
+                {
+                    BackupListRE.Container = new Container()
+                    {
+                        PriceLoan = DisplayRE.price
+                    };
+                }
                 LoanWindow newLoanWindow = new LoanWindow();
-                newLoanWindow.Show();
+                newLoanWindow.DataContext = new LoanViewModel();
+                newLoanWindow.ShowDialog();
             });
         }
     }

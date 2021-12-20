@@ -197,7 +197,7 @@ namespace RealEstateApplication.ViewModel
             {
                 if (DisplayRE != null)
                 {
-                    BackupListRE.Container = new Container()
+                    var newContainer = new Container()
                     {
                         Purchase = false,
                         BackupViewRE = ListViewRE.ToList(),
@@ -209,7 +209,10 @@ namespace RealEstateApplication.ViewModel
                         DisplayTypeRE = DisplayTypeRE,
                         ViewRE = DisplayRE
                     };
-                    OpenUC.OpenChildUC(new DetailUC());
+                    BackupListRE.Container = newContainer;
+                    var child = new DetailUC();
+                    child.DataContext = new DetailViewModel();
+                    OpenUC.OpenChildUC(child);
                 }
             });
 

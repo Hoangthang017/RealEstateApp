@@ -83,7 +83,6 @@ namespace RealEstateApplication.ViewModel
                 if (string.IsNullOrEmpty(BackupListRE.Container.PriceLoan) == false)
                 {
                     DisplayRootPrice = BackupListRE.Container.PriceLoan;
-                    BackupListRE.Clear();
                 }
             });
 

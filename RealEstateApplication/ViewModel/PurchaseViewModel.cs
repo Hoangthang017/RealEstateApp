@@ -177,6 +177,58 @@ namespace RealEstateApplication.ViewModel
                     ListArea = new List<string>();
                     ListArea = Filter.ListAreaRE;
                 }
+
+                if (string.IsNullOrEmpty(DisplayCity) == false)
+                {
+                    var newListDistrict = new List<string>();
+                    string chooseTP = "";
+                    if (DisplayCity == " Hà Nội")
+                    {
+                        chooseTP = "hà nội";
+                    }
+                    else if (DisplayCity == " Bà Rịa Vũng Tàu")
+                    {
+                        chooseTP = "vũng tàu";
+                    }
+                    else
+                    {
+                        chooseTP = DisplayCity.ToLower();
+                    }
+                    var currentTP = DataProvider.Ins.DB.devvn_tinhthanhpho.Where(x => x.nameTP.ToLower().Contains(chooseTP) == true).FirstOrDefault();
+                    if (currentTP != null)
+                    {
+                        var _District = DataProvider.Ins.DB.devvn_quanhuyen.Where(x => x.matp == currentTP.matp).ToList();
+                        foreach (var district in _District)
+                        {
+                            if (district.typeQH != "Quận")
+                            {
+                                newListDistrict.Add(district.name.Replace(district.typeQH, ""));
+                            }
+                            else
+                            {
+                                newListDistrict.Add(district.name);
+                            }
+                        }
+                        ListDistrict = newListDistrict;
+                    }
+                }
+
+                if (string.IsNullOrEmpty(DisplayDistrict) == false)
+                {
+                    var newListWard = new List<string>();
+                    var _District = DataProvider.Ins.DB.devvn_quanhuyen.Where(x => x.name.Contains(DisplayDistrict) == true).FirstOrDefault();
+                    if (_District != null)
+                    {
+                        var _Wards = DataProvider.Ins.DB.devvn_xaphuongthitran.Where(x => x.maqh == _District.maqh).ToList();
+                        foreach (var war in _Wards)
+                        {
+                            newListWard.Add(war.nameXa.Replace(war.typeXa, ""));
+                        }
+                        ListWard = newListWard;
+                    }
+
+                }
+
             });
 
             // sự kiện thay đổi lựu chọn loại bất động sản
@@ -198,6 +250,8 @@ namespace RealEstateApplication.ViewModel
                 DisplayCity = null;
                 DisplayArea = null;
                 DisplayPrice = null;
+                DisplayDistrict = null;
+                DisplayWard = null;
                 ListViewRE = new ObservableCollection<RealEstateInfo>(DataProvider.Ins.DB.RealEstateInfoes.Where(x => x.type.Contains("Bán ") == true).ToList());
                 ListViewQueryRE = ListViewRE;
             });
@@ -250,10 +304,6 @@ namespace RealEstateApplication.ViewModel
                         DisplayTypeRE = DisplayTypeRE,
                         ViewRE = DisplayRE
                     };
-                    if (BackupListRE.Container != null)
-                    {
-                        BackupListRE.Container.Clear();
-                    }
                     BackupListRE.Container = newContainer;
                     var child = new DetailUC();
                     child.DataContext = new DetailViewModel();
@@ -286,7 +336,7 @@ namespace RealEstateApplication.ViewModel
 
             if (string.IsNullOrEmpty(DisplayDistrict) == false)
             {
-                ListViewQueryRE = new ObservableCollection<RealEstateInfo>(ListViewQueryRE.Where(x => x.title.ToLower().Contains(Query) == true).ToList());
+                ListViewQueryRE = new ObservableCollection<RealEstateInfo>(ListViewQueryRE.Where( x => x.address.ToLower().Contains(DisplayDistrict.ToLower()) == true).ToList());
             }
 
             if (string.IsNullOrEmpty(Query) == false)

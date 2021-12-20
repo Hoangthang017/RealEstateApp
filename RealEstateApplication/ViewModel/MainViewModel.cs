@@ -18,6 +18,7 @@ namespace RealEstateApplication.ViewModel
         public ICommand MoIconCommand { get; set; }
         public ICommand DongIconCommand { get; set; }
         public ICommand MoDanhChoBanUCCommand { get; set; }
+        public ICommand ClickDeleteFilterCommand { get; set; }
 
         //Mở đề xuất theo khoảng cách
         private Visibility _ismotab;
@@ -118,11 +119,23 @@ namespace RealEstateApplication.ViewModel
                     "1","2","3","4","5+"
                 };
             });
-
             OpenHomepageUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 var child = new Homepage();
                 child.DataContext = new HomepageViewModel();
-                OpenUC.OpenChildUC(child); 
+                OpenUC.OpenChildUC(child);
+            });
+            ClickDeleteFilterCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                NhapTinhThanhPho = null;
+                NhapQuanHuyen = null;
+                NhapXaPhuong = null;
+                NhapSoNha = null;
+
+                GioiTinh = null;
+                NamSinh = 0;  
+                LoaiHinh = null;     
+                SoNguoi=null;
+                MucLuong=0;
+
             });
             OpenPurchaseUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 var child = new PuchaseUC();
@@ -135,7 +148,9 @@ namespace RealEstateApplication.ViewModel
                 OpenUC.OpenChildUC(new RentUC()); 
             });
             OpenProjectUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                OpenUC.OpenChildUC(new ProjectUC()); 
+                var child = new ProjectUC();
+                child.DataContext = new ProjectViewModel();
+                OpenUC.OpenChildUC(child); 
             });
             MoDanhChoBanUCCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 passData.Clear();
@@ -152,7 +167,9 @@ namespace RealEstateApplication.ViewModel
                 passData.MucLuong = MucLuong;
 
                 OpenUC.BackupGridOpenUC = p as Grid;
-                OpenUC.OpenChildUC(new DeXuatUC());
+                var child = new DeXuatUC();
+                child.DataContext = new DeXuatViewModel();
+                OpenUC.OpenChildUC(child);
                 isMoTab = Visibility.Visible;
                 isDongTab = Visibility.Collapsed;
                 isDanhChoBan = Visibility.Collapsed;
