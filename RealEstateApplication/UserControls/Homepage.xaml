@@ -286,6 +286,28 @@
 
                             <!--Lọc thêm-->
                             <Grid Grid.Column="4">
+                                <Button Background="Red"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                        Foreground="White"
+                                        BorderBrush="Red"
+                                        Width="120"
+                                        Margin="0 0 10 0"
+                                        Command="{Binding DeleteFilterCommand}"
+                                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                        Padding="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="FilterOff" 
+                                                                 HorizontalAlignment="Center"
+                                                                 VerticalAlignment="Center"
+                                                                 Width="20"
+                                                                 Height="20"/>
+                                        <TextBlock Text="Xoá bộ lọc" Margin="10 0 0 0"></TextBlock>
+                                    </StackPanel>
+                                </Button>
+
+                            </Grid>
+                            <!--<Grid Grid.Column="4">
                                 <Button Background="Transparent"
                                         Foreground="White"
                                         BorderBrush="Transparent"
@@ -301,7 +323,7 @@
                                         <TextBlock Text="Lọc Thêm" Margin="10 0 0 0"></TextBlock>
                                     </StackPanel>
                                 </Button>
-                            </Grid>
+                            </Grid>-->
                         </Grid>
                     </Grid>
                 </Grid>

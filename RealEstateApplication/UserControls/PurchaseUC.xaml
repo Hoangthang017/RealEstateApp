@@ -207,8 +207,7 @@
 
                         <!--Lọc Thêm-->
                         <Grid Grid.Column="3">
-                            <StackPanel Orientation="Horizontal">
-                                <Button Background="Red"
+                            <Button Background="Red"
                                         Foreground="White"
                                         BorderBrush="Red"
                                         Width="120"
@@ -216,32 +215,15 @@
                                         Command="{Binding DeleteFilterCommand}"
                                         Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                                         Padding="0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="FilterOff" 
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="FilterOff" 
                                                                  HorizontalAlignment="Center"
                                                                  VerticalAlignment="Center"
                                                                  Width="20"
                                                                  Height="20"/>
-                                        <TextBlock Text="Xoá bộ lọc" Margin="10 0 0 0"></TextBlock>
-                                    </StackPanel>
-                                </Button>
-                                <Button Background="Transparent"
-                                        Foreground="White"
-                                        BorderBrush="Transparent"
-                                        Command="{Binding ClickMoreFilterCommand}"
-                                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                                        Padding="0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Settings" 
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Width="20"
-                                                                 Height="20"/>
-                                        <TextBlock Text="Lọc Thêm" Margin="10 0 0 0"></TextBlock>
-                                    </StackPanel>
-                                </Button>
-                            </StackPanel>
-
+                                    <TextBlock Text="Xoá bộ lọc" Margin="10 0 0 0"></TextBlock>
+                                </StackPanel>
+                            </Button>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -330,7 +312,8 @@
                                             IsTextSearchEnabled="True"
                                             materialDesign:HintAssist.HintOpacity="1"
                                             ItemsSource="{Binding ListDistrict}"
-                                            SelectedValue="{Binding DisplayDistrict,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                            SelectedValue="{Binding DisplayDistrict,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding DisplayDistrict,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                             <ComboBox.ItemContainerStyle>
                                 <Style TargetType="{x:Type ComboBoxItem}">
                                     <Setter Property="Foreground" Value="Black"/>
@@ -357,6 +340,7 @@
                                             IsEditable="True"
                                             ItemsSource="{Binding ListWard}"
                                             SelectedValue="{Binding DisplayWard,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    Text="{Binding DisplayWard,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                             materialDesign:HintAssist.HintOpacity="1">
                             <ComboBox.ItemContainerStyle>
                                 <Style TargetType="{x:Type ComboBoxItem}">

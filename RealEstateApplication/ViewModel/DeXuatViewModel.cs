@@ -304,7 +304,9 @@ namespace RealEstateApplication.ViewModel
                     passDataDetailRE.cellRealEstateInfo = DisplayRE.realestateinfo;
                     passDataDetailRE.cellRealEstateInfo.imageSource = new BitmapImage(new Uri(DisplayRE.realestateinfo.img));
                     passDataDetailRE.ListDetailDeXuat = ListProjects.ToList();
-                    OpenUC.OpenChildUC(new ChiTietDeXuat());
+                    var child = new ChiTietDeXuat();
+                    child.DataContext = new ChiTietDeXuatViewModel();
+                    OpenUC.OpenChildUC(child);
 
                     passData.passTinhThanhPho = TinhThanhPho;
                     passData.passQuanHuyen = QuanHuyen;

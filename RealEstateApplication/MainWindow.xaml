@@ -14,8 +14,8 @@
         x:Name="_MainWindow"
         DataContext="{StaticResource MainVM}"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="670" Width="1240">
-    
+        Title="Property Application" Height="670" Width="1240">
+
     <!--lấy sự kiện load window để show trang chủ-->
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -39,7 +39,7 @@
 
                 <Grid Grid.Row="0">
                     <!--Logo-->
-                    <Image Source="myLogo.png"
+                    <Image Source="b20002577a12a5eceba16e9147dc64bf.jpg"
                        Stretch="Fill"></Image>
                 </Grid>
 
@@ -159,16 +159,16 @@
 
         <Grid x:Name="gridDanhChoBan"
                           Visibility="{Binding isDanhChoBan}"
-                          Height="300"
                           Opacity="0.95"
-                          Width="200"
-                          Margin="15 260 1010 15"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Top">
+                          Width="516" 
+              Margin="20 0 0 100"
+              VerticalAlignment="Bottom"
+              HorizontalAlignment="Left">
             <Border BorderThickness="1"
                                 CornerRadius="10"
                                 BorderBrush="Black"
-                                Background="White" Margin="0,-43,-317,0" HorizontalAlignment="Left" Width="517">
+                                Background="White"
+                    HorizontalAlignment="Left" Width="517">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"></RowDefinition>
@@ -282,7 +282,7 @@
                                 Text="/tháng: "></TextBlock>
                         </StackPanel>
                     </Grid>
-                    
+
                     <Grid Grid.Row="4" Margin="5 0 0 0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20"></RowDefinition>
@@ -367,7 +367,21 @@
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="6">
-                        <Button
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Button
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="Red"
+                            Content="Xoá"
+                            BorderBrush="Transparent"
+                            Command="{Binding ClickDeleteFilterCommand}"
+                            CommandParameter="{Binding ElementName=gridMainContent}"
+                            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                            Width="120">
+                            </Button>
+                            <Button Margin="10 0 0 0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Background="Green"
@@ -377,13 +391,15 @@
                             CommandParameter="{Binding ElementName=gridMainContent}"
                             Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                             Width="120">
-                        </Button>
+                            </Button>
+                        </StackPanel> 
+                        
                     </Grid>
                 </Grid>
-                
+
             </Border>
         </Grid>
     </Grid>
     <!--grid main window-->
-    
+
 </Window>

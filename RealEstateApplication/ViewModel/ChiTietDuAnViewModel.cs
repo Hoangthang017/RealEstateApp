@@ -65,7 +65,9 @@ namespace RealEstateApplication.ViewModel
 
             ClickComebackCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                OpenUC.OpenChildUC(new ProjectUC());
+                var child = new ProjectUC();
+                child.DataContext = new ProjectViewModel();
+                OpenUC.OpenChildUC(child);
 
             });
         }
