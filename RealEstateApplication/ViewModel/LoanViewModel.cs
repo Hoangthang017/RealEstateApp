@@ -162,7 +162,8 @@ namespace RealEstateApplication.ViewModel
                 {
                     double SumRatePrice = 0;
                     double SumPayPrice = 0;
-                    double loanPrice = 0;
+                    double loanPrice = 50000000;
+                    
                     if (DisplayLoanPrice.ToLower().Contains("tỷ"))
                     {
                         loanPrice = double.Parse(DisplayLoanPrice.Split(' ')[0]) * 1000000000;
@@ -171,8 +172,6 @@ namespace RealEstateApplication.ViewModel
                     {
                         loanPrice = double.Parse(DisplayLoanPrice.Split(' ')[0]) * 1000000;
                     }
-
-                    loanPrice = 50000000;
 
                     ListPayPerMonth = new ObservableCollection<ViewPayPerMonth>();
                     double _RootPrice = Math.Round(loanPrice / DisplayMonth);
